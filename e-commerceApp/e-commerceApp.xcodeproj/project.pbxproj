@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		BE88F18E2C6CC587006AAA84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE88F18D2C6CC587006AAA84 /* AppDelegate.swift */; };
-		BE88F1922C6CC587006AAA84 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE88F1912C6CC587006AAA84 /* ViewController.swift */; };
 		BE88F1982C6CC587006AAA84 /* e_commerceApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BE88F1962C6CC587006AAA84 /* e_commerceApp.xcdatamodeld */; };
 		BE88F19A2C6CC588006AAA84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE88F1992C6CC588006AAA84 /* Assets.xcassets */; };
 		BE88F19D2C6CC588006AAA84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE88F19B2C6CC588006AAA84 /* LaunchScreen.storyboard */; };
@@ -18,7 +17,6 @@
 /* Begin PBXFileReference section */
 		BE88F18A2C6CC587006AAA84 /* e-commerceApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "e-commerceApp.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE88F18D2C6CC587006AAA84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BE88F1912C6CC587006AAA84 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		BE88F1972C6CC587006AAA84 /* e_commerceApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = e_commerceApp.xcdatamodel; sourceTree = "<group>"; };
 		BE88F1992C6CC588006AAA84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE88F19C2C6CC588006AAA84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -78,7 +76,8 @@
 		BE88F1A52C6CC5FE006AAA84 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				BE88F1912C6CC587006AAA84 /* ViewController.swift */,
+				BE88F1A92C6CCF50006AAA84 /* Home */,
+				BE88F1AA2C6CCF5A006AAA84 /* Cart */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -89,6 +88,20 @@
 				BE88F1A62C6CC78E006AAA84 /* MainVC.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		BE88F1A92C6CCF50006AAA84 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		BE88F1AA2C6CCF5A006AAA84 /* Cart */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cart;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,7 +174,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE88F1922C6CC587006AAA84 /* ViewController.swift in Sources */,
 				BE88F1A72C6CC78E006AAA84 /* MainVC.swift in Sources */,
 				BE88F18E2C6CC587006AAA84 /* AppDelegate.swift in Sources */,
 				BE88F1982C6CC587006AAA84 /* e_commerceApp.xcdatamodeld in Sources */,
@@ -315,7 +327,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -343,7 +355,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
