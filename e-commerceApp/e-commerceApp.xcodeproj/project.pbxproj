@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE0548972C72125400EEF408 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0548902C72125400EEF408 /* HomePresenter.swift */; };
+		BE0548982C72125400EEF408 /* HomeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0548912C72125400EEF408 /* HomeWorker.swift */; };
+		BE0548992C72125400EEF408 /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0548922C72125400EEF408 /* HomeRouter.swift */; };
+		BE05489A2C72125400EEF408 /* HomeModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0548932C72125400EEF408 /* HomeModels.swift */; };
+		BE05489B2C72125400EEF408 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0548942C72125400EEF408 /* HomeViewController.swift */; };
+		BE05489C2C72125400EEF408 /* HomeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0548952C72125400EEF408 /* HomeBuilder.swift */; };
+		BE05489D2C72125400EEF408 /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0548962C72125400EEF408 /* HomeInteractor.swift */; };
+		BE0548A02C72145A00EEF408 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = BE05489F2C72145A00EEF408 /* SnapKit */; };
 		BE88F18E2C6CC587006AAA84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE88F18D2C6CC587006AAA84 /* AppDelegate.swift */; };
 		BE88F1982C6CC587006AAA84 /* e_commerceApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BE88F1962C6CC587006AAA84 /* e_commerceApp.xcdatamodeld */; };
 		BE88F19A2C6CC588006AAA84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE88F1992C6CC588006AAA84 /* Assets.xcassets */; };
@@ -15,6 +23,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BE0548902C72125400EEF408 /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
+		BE0548912C72125400EEF408 /* HomeWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWorker.swift; sourceTree = "<group>"; };
+		BE0548922C72125400EEF408 /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
+		BE0548932C72125400EEF408 /* HomeModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModels.swift; sourceTree = "<group>"; };
+		BE0548942C72125400EEF408 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		BE0548952C72125400EEF408 /* HomeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBuilder.swift; sourceTree = "<group>"; };
+		BE0548962C72125400EEF408 /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
 		BE88F18A2C6CC587006AAA84 /* e-commerceApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "e-commerceApp.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE88F18D2C6CC587006AAA84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE88F1972C6CC587006AAA84 /* e_commerceApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = e_commerceApp.xcdatamodel; sourceTree = "<group>"; };
@@ -29,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE0548A02C72145A00EEF408 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,6 +109,13 @@
 		BE88F1A92C6CCF50006AAA84 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				BE0548952C72125400EEF408 /* HomeBuilder.swift */,
+				BE0548942C72125400EEF408 /* HomeViewController.swift */,
+				BE0548902C72125400EEF408 /* HomePresenter.swift */,
+				BE0548912C72125400EEF408 /* HomeWorker.swift */,
+				BE0548922C72125400EEF408 /* HomeRouter.swift */,
+				BE0548932C72125400EEF408 /* HomeModels.swift */,
+				BE0548962C72125400EEF408 /* HomeInteractor.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -120,6 +143,9 @@
 			dependencies = (
 			);
 			name = "e-commerceApp";
+			packageProductDependencies = (
+				BE05489F2C72145A00EEF408 /* SnapKit */,
+			);
 			productName = "e-commerceApp";
 			productReference = BE88F18A2C6CC587006AAA84 /* e-commerceApp.app */;
 			productType = "com.apple.product-type.application";
@@ -148,6 +174,9 @@
 				Base,
 			);
 			mainGroup = BE88F1812C6CC587006AAA84;
+			packageReferences = (
+				BE05489E2C72145A00EEF408 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = BE88F18B2C6CC587006AAA84 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -175,8 +204,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE88F1A72C6CC78E006AAA84 /* MainVC.swift in Sources */,
+				BE0548992C72125400EEF408 /* HomeRouter.swift in Sources */,
 				BE88F18E2C6CC587006AAA84 /* AppDelegate.swift in Sources */,
+				BE05489D2C72125400EEF408 /* HomeInteractor.swift in Sources */,
+				BE05489B2C72125400EEF408 /* HomeViewController.swift in Sources */,
 				BE88F1982C6CC587006AAA84 /* e_commerceApp.xcdatamodeld in Sources */,
+				BE0548982C72125400EEF408 /* HomeWorker.swift in Sources */,
+				BE05489C2C72125400EEF408 /* HomeBuilder.swift in Sources */,
+				BE0548972C72125400EEF408 /* HomePresenter.swift in Sources */,
+				BE05489A2C72125400EEF408 /* HomeModels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,7 +363,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -355,7 +391,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -391,6 +427,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BE05489E2C72145A00EEF408 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BE05489F2C72145A00EEF408 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BE05489E2C72145A00EEF408 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		BE88F1962C6CC587006AAA84 /* e_commerceApp.xcdatamodeld */ = {

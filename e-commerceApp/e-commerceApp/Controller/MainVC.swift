@@ -20,7 +20,7 @@ extension MainVC {
     private func setup() {
        
         // Create VC
-        let homeVC = createViewController(rootVC: SearchVC(), title: "Home", image: "house")
+        let homeVC = createViewController(rootVC: HomeBuilder.build(), title: "Home", image: "house")
         let cartVC = createViewController(rootVC: AppsVC(), title: "My Cart", image: "cart")
       
         
@@ -72,12 +72,7 @@ extension MainVC {
 
 // MARK: - VC
 
-final class SearchVC: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .systemRed
-    }
-}
+
 
 final class AppsVC: UIViewController {
     override func viewDidLoad() {
