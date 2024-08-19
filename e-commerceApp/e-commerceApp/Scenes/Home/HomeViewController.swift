@@ -28,21 +28,19 @@ final class HomeViewController: UIViewController {
     
     // MARK: - UI Elements
     private lazy var homeCollectionView: UICollectionView = {
-        // Create and configure the collection view with a compositional layout
         let layout = UICollectionViewCompositionalLayout { sectionIndex, _ in
-            // Determine the layout for each section based on the SectionType enum
             guard let sectionType = SectionType(rawValue: sectionIndex) else { return nil }
-            
+
             switch sectionType {
             case .featured:
-                return nil // Configure the layout for the featured section
+                return HomeViewController.createFeatured()
             case .category:
-                return nil // Configure the layout for the category section
+                return HomeViewController.createCategory()
             case .products:
-                return nil // Configure the layout for the products section
+                return HomeViewController.createProducts()
             }
         }
-        
+
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return view
     }()
@@ -66,7 +64,12 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        layout()
+    }
+    
+    // Layout
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        homeCollectionView.frame = view.bounds
     }
     
     // MARK: - Setup
@@ -78,23 +81,75 @@ final class HomeViewController: UIViewController {
         homeCollectionView.dataSource = self
         
         homeCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        
+      //  homeCollectionView.collectionViewLayout.invalidateLayout()
+
     }
     
-    // MARK: - Layout
-    private func layout() {
-        // Set up constraints for the collection view using SnapKit
-        homeCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
-            make.trailing.equalTo(view.snp.trailingMargin).inset(8)
-            make.leading.equalTo(view.snp.leadingMargin).offset(8)
-            // Consider adding bottom constraint if needed
-        }
-    }
+
+   
 }
 
 // MARK: - HomeDisplayLogic Implement
 extension HomeViewController: HomeDisplayLogic {
     // Implement methods defined in the HomeDisplayLogic protocol
+}
+
+
+// MARK: - Section Layout Creation
+extension HomeViewController {
+
+    // Featured Section Layout
+    static func createFeatured() -> NSCollectionLayoutSection? {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalHeight(0.7))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .absolute(.screenHeight / 3))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuous
+/*
+        // Header ekleme
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(50))
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top
+        )
+        section.boundarySupplementaryItems = [header]
+*/
+        return section
+    }
+
+
+    // Category Section Layout
+    static func createCategory() -> NSCollectionLayoutSection? {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.3), heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = .init(top: 10, leading: 10, bottom: 10, trailing: 10)
+
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalHeight(0.3))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuous // Yatay kayma özelliği
+        return section
+    }
+
+    // Products Section Layout
+    static func createProducts() -> NSCollectionLayoutSection? {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = .init(top: 10, leading: 10, bottom: 10, trailing: 10)
+
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.4))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .groupPaging // Yatay kayma özelliği
+        return section
+    }
 }
 
 // MARK: - UICollectionViewDataSource & UICollectionViewDelegate
@@ -106,27 +161,34 @@ extension HomeViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // Return the number of items in each section (temporarily set to 3)
-        return 3
+        
+        guard let sectionType = SectionType(rawValue: section) else { return 0 }
+        
+        switch sectionType {
+        case .featured:
+            return 3
+        case .category:
+            return 5
+        case .products:
+            return 7
+        }
+        
+    
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let sectionType = SectionType(rawValue: indexPath.section) else { return UICollectionViewCell() }
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
-        cell.contentView.backgroundColor = .lightGray // Temporary styling for testing
         
         // Configure the cell based on the section type
         switch sectionType {
         case .featured:
-            // Configure the cell for the featured section
-            break
+            cell.contentView.backgroundColor = .red // Featured section cell with red background
         case .category:
-            // Configure the cell for the category section
-            break
+            cell.contentView.backgroundColor = .blue // Temporary styling for testing
         case .products:
-            // Configure the cell for the products section
-            break
+            cell.contentView.backgroundColor = .green // Temporary styling for testing
         }
         
         return cell
