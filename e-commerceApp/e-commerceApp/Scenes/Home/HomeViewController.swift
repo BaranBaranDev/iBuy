@@ -15,7 +15,7 @@ protocol HomeDisplayLogic: AnyObject {
 }
 
 // MARK: - SectionType Enum
-private enum SectionType: Int, CaseIterable {
+ enum SectionType: Int, CaseIterable {
     case featured = 0
     case category = 1
     case products = 2
@@ -43,14 +43,7 @@ final class HomeViewController: UIViewController {
         let layout = UICollectionViewCompositionalLayout { sectionIndex, _ in
             guard let sectionType = SectionType(rawValue: sectionIndex) else { return nil }
             
-            switch sectionType {
-            case .featured:
-                return HomeViewController.createFeatured()
-            case .category:
-                return HomeViewController.createCategory()
-            case .products:
-                return HomeViewController.createProducts()
-            }
+            return HomeSectionFactory.createLayout(for: sectionType)
         }
         
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -97,111 +90,11 @@ final class HomeViewController: UIViewController {
     }
 }
 
+// MARK: - HomeDisplayLogic İmplement
 extension HomeViewController: HomeDisplayLogic {
     
 }
 
-// MARK: - Section Layout Creation
-private extension HomeViewController {
-    
-    static func createFeatured() -> NSCollectionLayoutSection? {
-        let item = NSCollectionLayoutItem(
-            layoutSize: .init(
-                widthDimension: .fractionalWidth(0.9),
-                heightDimension: .fractionalHeight(0.7)
-            )
-        )
-        
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(0.9),
-            heightDimension: .absolute(.screenHeight / 3)
-        )
-        let group = NSCollectionLayoutGroup.horizontal(
-            layoutSize: groupSize,
-            subitems: [item]
-        )
-        
-        let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
-        
-        let header = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: .init(
-                widthDimension: .fractionalWidth(1.0),
-                heightDimension: .absolute(80)
-            ),
-            elementKind: UICollectionView.elementKindSectionHeader,
-            alignment: .top
-        )
-        
-        section.boundarySupplementaryItems = [header]
-        return section
-    }
-    
-    static func createCategory() -> NSCollectionLayoutSection? {
-        let item = NSCollectionLayoutItem(
-            layoutSize: .init(
-                widthDimension: .fractionalWidth(0.8),
-                heightDimension: .fractionalHeight(0.5)
-            )
-        )
-        
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(0.9),
-            heightDimension: .absolute(.screenHeight / 5)
-        )
-        let group = NSCollectionLayoutGroup.horizontal(
-            layoutSize: groupSize,
-            subitems: [item]
-        )
-        
-        let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
-        
-        let header = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: .init(
-                widthDimension: .fractionalWidth(1.0),
-                heightDimension: .absolute(50)
-            ),
-            elementKind: UICollectionView.elementKindSectionHeader,
-            alignment: .top
-        )
-        
-        section.boundarySupplementaryItems = [header]
-        return section
-    }
-    
-    static func createProducts() -> NSCollectionLayoutSection? {
-        let item = NSCollectionLayoutItem(
-            layoutSize: .init(
-                widthDimension: .fractionalWidth(0.5),
-                heightDimension: .fractionalHeight(0.9)
-            )
-        )
-        item.contentInsets = .init(top: 10, leading: 10, bottom: 10, trailing: 10)
-        
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1),
-            heightDimension: .fractionalHeight(0.3)
-        )
-        let group = NSCollectionLayoutGroup.horizontal(
-            layoutSize: groupSize,
-            subitems: [item]
-        )
-        
-        let section = NSCollectionLayoutSection(group: group)
-        
-        let header = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: .init(
-                widthDimension: .fractionalWidth(1),
-                heightDimension: .absolute(45)
-            ),
-            elementKind: UICollectionView.elementKindSectionHeader,
-            alignment: .top
-        )
-        section.boundarySupplementaryItems = [header]
-        return section
-    }
-}
 
 // MARK: - UICollectionViewDataSource
 extension HomeViewController: UICollectionViewDataSource {
@@ -241,7 +134,7 @@ extension HomeViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let sectionType = SectionType(rawValue: indexPath.section) else { return UICollectionReusableView() }
-        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ReuseID.headerView, for: indexPath) as! HeaderView
+        guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ReuseID.headerView, for: indexPath) as? HeaderView else { return UICollectionReusableView()}
         
         headerView.headerText = sectionType.sectionTitle
         return headerView
