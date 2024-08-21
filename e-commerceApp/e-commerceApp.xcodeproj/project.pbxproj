@@ -15,6 +15,7 @@
 		BE05489C2C72125400EEF408 /* HomeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0548952C72125400EEF408 /* HomeBuilder.swift */; };
 		BE05489D2C72125400EEF408 /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0548962C72125400EEF408 /* HomeInteractor.swift */; };
 		BE0548A02C72145A00EEF408 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = BE05489F2C72145A00EEF408 /* SnapKit */; };
+		BE076C2D2C75E62C0086D3AA /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE076C2C2C75E62C0086D3AA /* HeaderView.swift */; };
 		BE0B29842C737FEE00A13C83 /* CGFloat+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0B29832C737FEE00A13C83 /* CGFloat+Ext.swift */; };
 		BE24F7012C74BAA80049D440 /* ReuseID.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24F7002C74BAA80049D440 /* ReuseID.swift */; };
 		BE24F7032C74BB1B0049D440 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24F7022C74BB1B0049D440 /* CategoryCell.swift */; };
@@ -35,6 +36,7 @@
 		BE0548942C72125400EEF408 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		BE0548952C72125400EEF408 /* HomeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBuilder.swift; sourceTree = "<group>"; };
 		BE0548962C72125400EEF408 /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
+		BE076C2C2C75E62C0086D3AA /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		BE0B29832C737FEE00A13C83 /* CGFloat+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Ext.swift"; sourceTree = "<group>"; };
 		BE24F7002C74BAA80049D440 /* ReuseID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseID.swift; sourceTree = "<group>"; };
 		BE24F7022C74BB1B0049D440 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 				BE24F7092C74CFE70049D440 /* FeatureCell.swift */,
 				BE24F7022C74BB1B0049D440 /* CategoryCell.swift */,
 				BE24F7042C74BB260049D440 /* ProductCell.swift */,
+				BE076C2C2C75E62C0086D3AA /* HeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 				BE05489C2C72125400EEF408 /* HomeBuilder.swift in Sources */,
 				BE0548972C72125400EEF408 /* HomePresenter.swift in Sources */,
 				BE05489A2C72125400EEF408 /* HomeModels.swift in Sources */,
+				BE076C2D2C75E62C0086D3AA /* HeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

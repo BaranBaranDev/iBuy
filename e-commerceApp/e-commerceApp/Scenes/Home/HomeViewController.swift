@@ -19,12 +19,24 @@ private enum SectionType: Int, CaseIterable {
     case featured = 0
     case category = 1
     case products = 2
+    
+    var sectionTitle: String {
+        switch self {
+        case .featured:
+            return "Featured"
+        case .category:
+            return "Category"
+        case .products:
+            return "Products"
+        }
+    }
 }
 
 final class HomeViewController: UIViewController {
     
     // MARK: - Properties
-    // Define necessary properties here, such as data models or view models.
+    private var interactor: HomeBusinessLogic & HomeDataStore
+    private let router: HomeRoutingLogic
     
     // MARK: - UI Elements
     private lazy var homeCollectionView: UICollectionView = {
@@ -45,10 +57,6 @@ final class HomeViewController: UIViewController {
         return view
     }()
     
-    // MARK: - Dependencies
-    private var interactor: HomeBusinessLogic & HomeDataStore
-    private let router: HomeRoutingLogic
-    
     // MARK: - Initialization
     init(interactor: HomeBusinessLogic & HomeDataStore, router: HomeRoutingLogic) {
         self.interactor = interactor
@@ -66,7 +74,6 @@ final class HomeViewController: UIViewController {
         setup()
     }
     
-    // Layout
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         homeCollectionView.frame = view.bounds
@@ -74,97 +81,136 @@ final class HomeViewController: UIViewController {
     
     // MARK: - Setup
     private func setup() {
-        // Add and configure the collection view
         view.addSubview(homeCollectionView)
         
+        // Configure CollectionView
         homeCollectionView.delegate = self
         homeCollectionView.dataSource = self
         
         homeCollectionView.register(FeatureCell.self, forCellWithReuseIdentifier: ReuseID.featureCell)
         homeCollectionView.register(CategoryCell.self, forCellWithReuseIdentifier: ReuseID.categoryCell)
         homeCollectionView.register(ProductCell.self, forCellWithReuseIdentifier: ReuseID.productCell)
+        homeCollectionView.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ReuseID.headerView)
         
-        homeCollectionView.collectionViewLayout.invalidateLayout() // collection düzeni geçersiz kılar
-        
+        // Invalidate layout
+        homeCollectionView.collectionViewLayout.invalidateLayout()
     }
-    
-    
-    
 }
 
-// MARK: - HomeDisplayLogic Implement
 extension HomeViewController: HomeDisplayLogic {
-    // Implement methods defined in the HomeDisplayLogic protocol
+    
 }
-
 
 // MARK: - Section Layout Creation
-extension HomeViewController {
+private extension HomeViewController {
     
-    // Featured Section Layout
     static func createFeatured() -> NSCollectionLayoutSection? {
+        let item = NSCollectionLayoutItem(
+            layoutSize: .init(
+                widthDimension: .fractionalWidth(0.9),
+                heightDimension: .fractionalHeight(0.7)
+            )
+        )
         
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalHeight(0.7))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .absolute(.screenHeight / 3))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(0.9),
+            heightDimension: .absolute(.screenHeight / 3)
+        )
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: groupSize,
+            subitems: [item]
+        )
         
         let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .groupPaging
-        /*
-         // Header ekleme
-         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(50))
-         let header = NSCollectionLayoutBoundarySupplementaryItem(
-         layoutSize: headerSize,
-         elementKind: UICollectionView.elementKindSectionHeader,
-         alignment: .top
-         )
-         section.boundarySupplementaryItems = [header]
-         */
+        section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+        
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: .init(
+                widthDimension: .fractionalWidth(1.0),
+                heightDimension: .absolute(80)
+            ),
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top
+        )
+        
+        section.boundarySupplementaryItems = [header]
         return section
     }
     
-    
-    // Category Section Layout
     static func createCategory() -> NSCollectionLayoutSection? {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.3), heightDimension: .fractionalHeight(1.0))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = .init(top: 10, leading: 10, bottom: 10, trailing: 10)
+        let item = NSCollectionLayoutItem(
+            layoutSize: .init(
+                widthDimension: .fractionalWidth(0.8),
+                heightDimension: .fractionalHeight(0.5)
+            )
+        )
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalHeight(0.3))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(0.9),
+            heightDimension: .absolute(.screenHeight / 5)
+        )
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: groupSize,
+            subitems: [item]
+        )
         
         let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .continuous // Yatay kayma özelliği
+        section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+        
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: .init(
+                widthDimension: .fractionalWidth(1.0),
+                heightDimension: .absolute(50)
+            ),
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top
+        )
+        
+        section.boundarySupplementaryItems = [header]
         return section
     }
     
-    // Products Section Layout
     static func createProducts() -> NSCollectionLayoutSection? {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1.0))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let item = NSCollectionLayoutItem(
+            layoutSize: .init(
+                widthDimension: .fractionalWidth(0.5),
+                heightDimension: .fractionalHeight(0.9)
+            )
+        )
         item.contentInsets = .init(top: 10, leading: 10, bottom: 10, trailing: 10)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.4))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .fractionalHeight(0.3)
+        )
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: groupSize,
+            subitems: [item]
+        )
         
         let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .groupPaging // Yatay kayma özelliği
+        
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: .init(
+                widthDimension: .fractionalWidth(1),
+                heightDimension: .absolute(45)
+            ),
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top
+        )
+        section.boundarySupplementaryItems = [header]
         return section
     }
 }
 
-// MARK: - UICollectionViewDataSource & UICollectionViewDelegate
+// MARK: - UICollectionViewDataSource
 extension HomeViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // Return the number of sections based on the SectionType enum
         return SectionType.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
         guard let sectionType = SectionType(rawValue: section) else { return 0 }
         
         switch sectionType {
@@ -175,35 +221,36 @@ extension HomeViewController: UICollectionViewDataSource {
         case .products:
             return 7
         }
-        
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let sectionType = SectionType(rawValue: indexPath.section) else { return UICollectionViewCell() }
         
-        // configure Section Cell
         switch sectionType {
         case .featured:
-            guard let cell = homeCollectionView.dequeueReusableCell(withReuseIdentifier: ReuseID.featureCell, for: indexPath) as? FeatureCell else { return UICollectionViewCell()}
-            
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseID.featureCell, for: indexPath) as? FeatureCell else { return UICollectionViewCell() }
             return cell
-            
         case .category:
-            guard let cell = homeCollectionView.dequeueReusableCell(withReuseIdentifier: ReuseID.categoryCell, for: indexPath) as? CategoryCell else { return UICollectionViewCell()}
-            
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseID.categoryCell, for: indexPath) as? CategoryCell else { return UICollectionViewCell() }
             return cell
         case .products:
-            guard let cell = homeCollectionView.dequeueReusableCell(withReuseIdentifier: ReuseID.productCell, for: indexPath) as? ProductCell else { return UICollectionViewCell()}
-            
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseID.productCell, for: indexPath) as? ProductCell else { return UICollectionViewCell() }
             return cell
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard let sectionType = SectionType(rawValue: indexPath.section) else { return UICollectionReusableView() }
+        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ReuseID.headerView, for: indexPath) as! HeaderView
         
+        headerView.headerText = sectionType.sectionTitle
+        return headerView
     }
 }
 
+// MARK: - UICollectionViewDelegate
 extension HomeViewController: UICollectionViewDelegate {
-    // Implement any necessary delegate methods
+    // Implement necessary delegate methods if needed
 }
 
 // MARK: - Preview
