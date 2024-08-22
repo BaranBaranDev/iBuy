@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import SnapKit
 final class HeaderView: UICollectionReusableView {
     
     // MARK: Properties

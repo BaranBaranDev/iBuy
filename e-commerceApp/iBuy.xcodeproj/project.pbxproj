@@ -23,7 +23,6 @@
 		BE24F7052C74BB260049D440 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24F7042C74BB260049D440 /* ProductCell.swift */; };
 		BE24F70A2C74CFE70049D440 /* FeatureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24F7092C74CFE70049D440 /* FeatureCell.swift */; };
 		BE88F18E2C6CC587006AAA84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE88F18D2C6CC587006AAA84 /* AppDelegate.swift */; };
-		BE88F1982C6CC587006AAA84 /* e_commerceApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BE88F1962C6CC587006AAA84 /* e_commerceApp.xcdatamodeld */; };
 		BE88F19A2C6CC588006AAA84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE88F1992C6CC588006AAA84 /* Assets.xcassets */; };
 		BE88F19D2C6CC588006AAA84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE88F19B2C6CC588006AAA84 /* LaunchScreen.storyboard */; };
 		BE88F1A72C6CC78E006AAA84 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE88F1A62C6CC78E006AAA84 /* MainVC.swift */; };
@@ -44,9 +43,8 @@
 		BE24F7022C74BB1B0049D440 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		BE24F7042C74BB260049D440 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 		BE24F7092C74CFE70049D440 /* FeatureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureCell.swift; sourceTree = "<group>"; };
-		BE88F18A2C6CC587006AAA84 /* e-commerceApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "e-commerceApp.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE88F18A2C6CC587006AAA84 /* iBuy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iBuy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE88F18D2C6CC587006AAA84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BE88F1972C6CC587006AAA84 /* e_commerceApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = e_commerceApp.xcdatamodel; sourceTree = "<group>"; };
 		BE88F1992C6CC588006AAA84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE88F19C2C6CC588006AAA84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BE88F19E2C6CC588006AAA84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -68,6 +66,7 @@
 		BE076C2E2C7609740086D3AA /* App */ = {
 			isa = PBXGroup;
 			children = (
+				BE88F19E2C6CC588006AAA84 /* Info.plist */,
 				BE88F18D2C6CC587006AAA84 /* AppDelegate.swift */,
 			);
 			path = App;
@@ -111,7 +110,7 @@
 		BE88F1812C6CC587006AAA84 = {
 			isa = PBXGroup;
 			children = (
-				BE88F18C2C6CC587006AAA84 /* e-commerceApp */,
+				BE88F18C2C6CC587006AAA84 /* iBuy */,
 				BE88F18B2C6CC587006AAA84 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -119,12 +118,12 @@
 		BE88F18B2C6CC587006AAA84 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BE88F18A2C6CC587006AAA84 /* e-commerceApp.app */,
+				BE88F18A2C6CC587006AAA84 /* iBuy.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		BE88F18C2C6CC587006AAA84 /* e-commerceApp */ = {
+		BE88F18C2C6CC587006AAA84 /* iBuy */ = {
 			isa = PBXGroup;
 			children = (
 				BE076C2E2C7609740086D3AA /* App */,
@@ -134,9 +133,8 @@
 				BE88F1A82C6CC793006AAA84 /* Controller */,
 				BE88F1A52C6CC5FE006AAA84 /* Scenes */,
 				BE88F1A42C6CC595006AAA84 /* Files */,
-				BE88F1962C6CC587006AAA84 /* e_commerceApp.xcdatamodeld */,
 			);
-			path = "e-commerceApp";
+			path = iBuy;
 			sourceTree = "<group>";
 		};
 		BE88F1A42C6CC595006AAA84 /* Files */ = {
@@ -144,7 +142,6 @@
 			children = (
 				BE88F1992C6CC588006AAA84 /* Assets.xcassets */,
 				BE88F19B2C6CC588006AAA84 /* LaunchScreen.storyboard */,
-				BE88F19E2C6CC588006AAA84 /* Info.plist */,
 			);
 			path = Files;
 			sourceTree = "<group>";
@@ -191,9 +188,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		BE88F1892C6CC587006AAA84 /* e-commerceApp */ = {
+		BE88F1892C6CC587006AAA84 /* iBuy */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BE88F1A12C6CC588006AAA84 /* Build configuration list for PBXNativeTarget "e-commerceApp" */;
+			buildConfigurationList = BE88F1A12C6CC588006AAA84 /* Build configuration list for PBXNativeTarget "iBuy" */;
 			buildPhases = (
 				BE88F1862C6CC587006AAA84 /* Sources */,
 				BE88F1872C6CC587006AAA84 /* Frameworks */,
@@ -203,12 +200,12 @@
 			);
 			dependencies = (
 			);
-			name = "e-commerceApp";
+			name = iBuy;
 			packageProductDependencies = (
 				BE05489F2C72145A00EEF408 /* SnapKit */,
 			);
 			productName = "e-commerceApp";
-			productReference = BE88F18A2C6CC587006AAA84 /* e-commerceApp.app */;
+			productReference = BE88F18A2C6CC587006AAA84 /* iBuy.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -226,7 +223,7 @@
 					};
 				};
 			};
-			buildConfigurationList = BE88F1852C6CC587006AAA84 /* Build configuration list for PBXProject "e-commerceApp" */;
+			buildConfigurationList = BE88F1852C6CC587006AAA84 /* Build configuration list for PBXProject "iBuy" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -242,7 +239,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				BE88F1892C6CC587006AAA84 /* e-commerceApp */,
+				BE88F1892C6CC587006AAA84 /* iBuy */,
 			);
 		};
 /* End PBXProject section */
@@ -274,7 +271,6 @@
 				BE24F70A2C74CFE70049D440 /* FeatureCell.swift in Sources */,
 				BE24F7012C74BAA80049D440 /* ReuseID.swift in Sources */,
 				BE05489B2C72125400EEF408 /* HomeViewController.swift in Sources */,
-				BE88F1982C6CC587006AAA84 /* e_commerceApp.xcdatamodeld in Sources */,
 				BE0548982C72125400EEF408 /* HomeWorker.swift in Sources */,
 				BE076C312C7609EE0086D3AA /* HomeSectionFactory.swift in Sources */,
 				BE05489C2C72125400EEF408 /* HomeBuilder.swift in Sources */,
@@ -426,7 +422,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9N2C3RSUH8;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "e-commerceApp/Files/Info.plist";
+				INFOPLIST_FILE = iBuy/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -454,7 +450,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9N2C3RSUH8;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "e-commerceApp/Files/Info.plist";
+				INFOPLIST_FILE = iBuy/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -476,7 +472,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		BE88F1852C6CC587006AAA84 /* Build configuration list for PBXProject "e-commerceApp" */ = {
+		BE88F1852C6CC587006AAA84 /* Build configuration list for PBXProject "iBuy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BE88F19F2C6CC588006AAA84 /* Debug */,
@@ -485,7 +481,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BE88F1A12C6CC588006AAA84 /* Build configuration list for PBXNativeTarget "e-commerceApp" */ = {
+		BE88F1A12C6CC588006AAA84 /* Build configuration list for PBXNativeTarget "iBuy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BE88F1A22C6CC588006AAA84 /* Debug */,
@@ -514,19 +510,6 @@
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
-
-/* Begin XCVersionGroup section */
-		BE88F1962C6CC587006AAA84 /* e_commerceApp.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				BE88F1972C6CC587006AAA84 /* e_commerceApp.xcdatamodel */,
-			);
-			currentVersion = BE88F1972C6CC587006AAA84 /* e_commerceApp.xcdatamodel */;
-			path = e_commerceApp.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = BE88F1822C6CC587006AAA84 /* Project object */;
 }

@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SnapKit
 
 // MARK: - HomeDisplayLogic Protocol
 protocol HomeDisplayLogic: AnyObject {
