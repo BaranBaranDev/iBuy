@@ -34,6 +34,8 @@ protocol HomeDisplayLogic: AnyObject {
 final class HomeViewController: UIViewController {
     
     // MARK: - Properties
+    private(set) var featuresArray: [FeatureResponse] = []
+    
     private var interactor: HomeBusinessLogic & HomeDataStore
     private let router: HomeRoutingLogic
     
@@ -42,7 +44,7 @@ final class HomeViewController: UIViewController {
         let layout = UICollectionViewCompositionalLayout { sectionIndex, _ in
             guard let sectionType = SectionType(rawValue: sectionIndex) else { return nil }
             
-            return HomeSectionFactory.createLayout(for: sectionType)
+            return HomeSectionFactory.buildLayout(for: sectionType)
         }
         
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -64,6 +66,7 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        loadData()
     }
     
     override func viewDidLayoutSubviews() {
@@ -107,7 +110,10 @@ extension HomeViewController: UICollectionViewDataSource {
         
         switch sectionType {
         case .featured:
-            return 3
+            print(featuresArray.count)
+            return featuresArray.count
+          
+
         case .category:
             return 5
         case .products:
@@ -121,6 +127,8 @@ extension HomeViewController: UICollectionViewDataSource {
         switch sectionType {
         case .featured:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseID.featureCell, for: indexPath) as? FeatureCell else { return UICollectionViewCell() }
+            let model = featuresArray[indexPath.item]
+            cell.configure(for: model)
             return cell
         case .category:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseID.categoryCell, for: indexPath) as? CategoryCell else { return UICollectionViewCell() }
@@ -148,4 +156,23 @@ extension HomeViewController: UICollectionViewDelegate {
 // MARK: - Preview
 #Preview {
     HomeBuilder.build()
+}
+
+
+extension HomeViewController {
+    // MARK: - Data Loading
+    private func loadData() {
+        FirebaseService.shared.fetchFeatures { [weak self] result in
+            switch result {
+            case .success(let data):
+                self?.featuresArray = data
+                DispatchQueue.main.async {
+                    self?.homeCollectionView.reloadData() // Koleksiyon görünümünü yeniden yükle
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+
 }
