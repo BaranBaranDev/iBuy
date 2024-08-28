@@ -16,13 +16,13 @@ final class MainVC: UITabBarController {
 
 // MARK: - Helpers
 
-extension MainVC {
-    private func setup() {
-       
+private extension MainVC {
+    func setup() {
+        
         // Create VC
         let homeVC = createViewController(rootVC: HomeBuilder.build(), title: "Home", image: "house")
         let cartVC = createViewController(rootVC: AppsVC(), title: "My Cart", image: "cart")
-      
+        
         
         // Add tabbar
         viewControllers = [homeVC, cartVC]
@@ -33,19 +33,19 @@ extension MainVC {
     }
     
     // Create UINavigationController for each VC
-    private func createViewController(rootVC: UIViewController, title: String, image: String) -> UIViewController {
+    func createViewController(rootVC: UIViewController, title: String, image: String) -> UIViewController {
         let controller = UINavigationController(rootViewController: rootVC)
         controller.tabBarItem.title = title
         controller.tabBarItem.image = UIImage(systemName: image)
         
-     
+        
         rootVC.title = title
         
         return controller
     }
     
-   // Custom tabbar
-    private func customizeTabBar() {
+    // Custom tabbar
+    func customizeTabBar() {
         let appearance = UITabBarAppearance()
         appearance.backgroundImage = UIImage()
         appearance.shadowImage = UIImage()
@@ -56,7 +56,7 @@ extension MainVC {
     }
     
     // Custom NavBar
-    private func customizeNavigationBar() {
+    func customizeNavigationBar() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = .systemBackground

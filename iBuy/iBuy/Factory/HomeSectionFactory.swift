@@ -7,12 +7,29 @@
 
 import UIKit
 
+// MARK: - SectionType Enum
+ enum SectionType: Int, CaseIterable {
+    case featured = 0
+    case category = 1
+    case products = 2
+    
+    var sectionTitle: String {
+        switch self {
+        case .featured:
+            return "Featured"
+        case .category:
+            return "Category"
+        case .products:
+            return "Products"
+        }
+    }
+}
+
+
+// MARK: - HomeSectionFactory
 /// Factory class for creating layout sections in the home view.
 final class HomeSectionFactory {
-    /// Creates a layout section based on the section type.
-    /// - Parameter sectionType: The type of section to create.
-    /// - Returns: An `NSCollectionLayoutSection` for the given section type.
-    static func createLayout(for sectionType: SectionType) -> NSCollectionLayoutSection {
+    static func buildLayout(for sectionType: SectionType) -> NSCollectionLayoutSection {
         switch sectionType {
         case .featured:
             return createFeaturedSection()
@@ -22,19 +39,22 @@ final class HomeSectionFactory {
             return createProductsSection()
         }
     }
+    
+    private init(){}
 }
 
 // MARK: - Layout Section Creation
 private extension HomeSectionFactory {
     static func createFeaturedSection() -> NSCollectionLayoutSection {
-        let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalHeight(0.7)))
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .absolute(.screenHeight / 3))
+        let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.9)))
+        item.contentInsets = .init(top: 5, leading: 10, bottom: 5, trailing: 10)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .absolute(.screenHeight * 0.4))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
         let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
-
-        let header = createHeader(size: 80)
-        section.boundarySupplementaryItems = [header]
+        section.orthogonalScrollingBehavior = .groupPaging
+        
         return section
     }
 
@@ -72,4 +92,9 @@ private extension HomeSectionFactory {
             alignment: .top
         )
     }
+}
+
+
+#Preview {
+    HomeBuilder.build()
 }

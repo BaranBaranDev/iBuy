@@ -1,22 +1,26 @@
 //
 //  HomeModels.swift
-//  e-commerceApp
+//  iBuy
 //
-//  Created by Baran Baran on 18.08.2024.
+//  Created by Baran Baran on 28.08.2024.
 //
-
 
 import UIKit
 
+// MARK:  HomeModels
 enum HomeModels {
-  // MARK: Use cases
-  
-  enum Something {
-      struct Request {}
 
-      struct Response {}
+    // MARK: - Fetch Features Use Case
+    enum FetchFeatures {
+        
+        struct Request {}
+    
+        struct Response {
+            var features: [FeatureResponse]
+        }
 
-      struct ViewModel {}
-
-  }
+        struct ViewModel {
+            var features: [FeatureResponse]
+        }
+    }
 }

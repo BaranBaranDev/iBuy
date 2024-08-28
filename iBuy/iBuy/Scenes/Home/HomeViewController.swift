@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 // MARK: - HomeDisplayLogic Protocol
 protocol HomeDisplayLogic: AnyObject {
@@ -13,27 +14,12 @@ protocol HomeDisplayLogic: AnyObject {
     // func display(viewModel: HomeModels.Something.ViewModel)
 }
 
-// MARK: - SectionType Enum
- enum SectionType: Int, CaseIterable {
-    case featured = 0
-    case category = 1
-    case products = 2
-    
-    var sectionTitle: String {
-        switch self {
-        case .featured:
-            return "Featured"
-        case .category:
-            return "Category"
-        case .products:
-            return "Products"
-        }
-    }
-}
 
 final class HomeViewController: UIViewController {
     
     // MARK: - Properties
+    private(set) var featuresArray: [FeatureResponse] = []
+    
     private var interactor: HomeBusinessLogic & HomeDataStore
     private let router: HomeRoutingLogic
     
@@ -42,7 +28,7 @@ final class HomeViewController: UIViewController {
         let layout = UICollectionViewCompositionalLayout { sectionIndex, _ in
             guard let sectionType = SectionType(rawValue: sectionIndex) else { return nil }
             
-            return HomeSectionFactory.createLayout(for: sectionType)
+            return HomeSectionFactory.buildLayout(for: sectionType)
         }
         
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -64,6 +50,7 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        callData()
     }
     
     override func viewDidLayoutSubviews() {
@@ -107,7 +94,7 @@ extension HomeViewController: UICollectionViewDataSource {
         
         switch sectionType {
         case .featured:
-            return 3
+            return featuresArray.count
         case .category:
             return 5
         case .products:
@@ -121,6 +108,8 @@ extension HomeViewController: UICollectionViewDataSource {
         switch sectionType {
         case .featured:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseID.featureCell, for: indexPath) as? FeatureCell else { return UICollectionViewCell() }
+            let model = featuresArray[indexPath.item]
+            cell.configure(for: model)
             return cell
         case .category:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseID.categoryCell, for: indexPath) as? CategoryCell else { return UICollectionViewCell() }
@@ -148,4 +137,25 @@ extension HomeViewController: UICollectionViewDelegate {
 // MARK: - Preview
 #Preview {
     HomeBuilder.build()
+}
+
+
+extension HomeViewController {
+    private func callData() {
+        // FirebaseService üzerinden veriyi çekme
+        FirebaseService().fetchData(collectionName: "features") { [weak self] (result: Result<[FeatureResponse], ServiceError>) in
+            switch result {
+            case .success(let features):
+                // Başarılıysa veriler burada işlenir
+                print("Fetched features: \(features)")
+                self?.featuresArray = features
+                DispatchQueue.main.async {
+                    self?.homeCollectionView.reloadData() // Koleksiyon görünümünü yeniden yükle
+                }
+            case .failure(let error):
+                // Hata durumunda yapılacaklar
+                print("Failed to fetch features with error: \(error)")
+            }
+        }
+    }
 }

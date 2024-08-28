@@ -8,12 +8,12 @@
 import Foundation
 
 // MARK: - iBuyModel
-struct iBuyModel {
+struct iBuyModel: Codable {
     let features: [FeatureResponse]
 }
 
 // MARK: - FeatureResponse
-struct FeatureResponse {
-    let title: String
-    let imageUrl: String
+struct FeatureResponse: Codable {
+    let title: String?
+    let url: String
 }
