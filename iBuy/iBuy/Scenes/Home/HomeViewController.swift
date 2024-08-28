@@ -1,6 +1,6 @@
 //
 //  HomeViewController.swift
-//  e-commerceApp
+//  iBuy
 //
 //  Created by Baran Baran on 18.08.2024.
 //
@@ -10,24 +10,24 @@ import FirebaseFirestore
 
 // MARK: - HomeDisplayLogic Protocol
 protocol HomeDisplayLogic: AnyObject {
-    // Define display methods for updating the UI from the presenter
-    // func display(viewModel: HomeModels.Something.ViewModel)
+    func display(viewModel: HomeModels.FetchFeatures.ViewModel)
 }
 
 
+
+// MARK: - HomeViewController
 final class HomeViewController: UIViewController {
     
     // MARK: - Properties
-    private(set) var featuresArray: [FeatureResponse] = []
+    private(set) var features: [FeatureResponse] = []
     
-    private var interactor: HomeBusinessLogic & HomeDataStore
+    private let interactor: HomeBusinessLogic
     private let router: HomeRoutingLogic
     
     // MARK: - UI Elements
     private lazy var homeCollectionView: UICollectionView = {
         let layout = UICollectionViewCompositionalLayout { sectionIndex, _ in
             guard let sectionType = SectionType(rawValue: sectionIndex) else { return nil }
-            
             return HomeSectionFactory.buildLayout(for: sectionType)
         }
         
@@ -36,10 +36,11 @@ final class HomeViewController: UIViewController {
     }()
     
     // MARK: - Initialization
-    init(interactor: HomeBusinessLogic & HomeDataStore, router: HomeRoutingLogic) {
+    init(interactor: HomeBusinessLogic, router: HomeRoutingLogic) {
         self.interactor = interactor
         self.router = router
         super.init(nibName: nil, bundle: nil)
+        
     }
     
     required init?(coder: NSCoder) {
@@ -50,7 +51,8 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        callData()
+        fetchData()
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -73,12 +75,24 @@ final class HomeViewController: UIViewController {
         
         // Invalidate layout
         homeCollectionView.collectionViewLayout.invalidateLayout()
+        
+    }
+    private func fetchData(){
+        interactor.fetchFeatures(request: HomeModels.FetchFeatures.Request())
     }
 }
 
-// MARK: - HomeDisplayLogic İmplement
+// MARK: - HomeViewController: HomeDisplayLogic
 extension HomeViewController: HomeDisplayLogic {
-    
+    func display(viewModel: HomeModels.FetchFeatures.ViewModel) {
+        
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.features = viewModel.features
+
+            homeCollectionView.reloadData()
+        }
+    }
 }
 
 
@@ -94,7 +108,7 @@ extension HomeViewController: UICollectionViewDataSource {
         
         switch sectionType {
         case .featured:
-            return featuresArray.count
+            return features.count
         case .category:
             return 5
         case .products:
@@ -108,7 +122,7 @@ extension HomeViewController: UICollectionViewDataSource {
         switch sectionType {
         case .featured:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseID.featureCell, for: indexPath) as? FeatureCell else { return UICollectionViewCell() }
-            let model = featuresArray[indexPath.item]
+            let model = features[indexPath.item]
             cell.configure(for: model)
             return cell
         case .category:
@@ -137,25 +151,4 @@ extension HomeViewController: UICollectionViewDelegate {
 // MARK: - Preview
 #Preview {
     HomeBuilder.build()
-}
-
-
-extension HomeViewController {
-    private func callData() {
-        // FirebaseService üzerinden veriyi çekme
-        FirebaseService().fetchData(collectionName: "features") { [weak self] (result: Result<[FeatureResponse], ServiceError>) in
-            switch result {
-            case .success(let features):
-                // Başarılıysa veriler burada işlenir
-                print("Fetched features: \(features)")
-                self?.featuresArray = features
-                DispatchQueue.main.async {
-                    self?.homeCollectionView.reloadData() // Koleksiyon görünümünü yeniden yükle
-                }
-            case .failure(let error):
-                // Hata durumunda yapılacaklar
-                print("Failed to fetch features with error: \(error)")
-            }
-        }
-    }
 }

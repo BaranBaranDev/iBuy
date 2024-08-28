@@ -1,8 +1,8 @@
 //
 //  HomeRouter.swift
-//  e-commerceApp
+//  iBuy
 //
-//  Created by Baran Baran on 18.08.2024.
+//  Created by Baran Baran on 28.08.2024.
 
 
 
@@ -12,17 +12,11 @@ protocol HomeRoutingLogic {
   
 }
 
-protocol HomeDataPassing {
-  var dataStore: HomeDataStore? { get }
-}
 
 
-
-final class HomeRouter:  HomeDataPassing {
+final class HomeRouter {
     
   weak var controller: HomeViewController?
-  var dataStore: HomeDataStore?
-
 }
 
 

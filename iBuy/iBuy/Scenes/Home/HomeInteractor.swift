@@ -1,33 +1,26 @@
 //
 //  HomeInteractor.swift
-//  e-commerceApp
+//  iBuy
 //
-//  Created by Baran Baran on 18.08.2024.
-
+//  Created by Baran Baran on 28.08.2024.
 
 
 import Foundation
 
+// MARK: - HomeBusinessLogic
 protocol HomeBusinessLogic {
-    
-    
+    func fetchFeatures(request: HomeModels.FetchFeatures.Request)
 }
 
-protocol HomeDataStore {
-    //var name: String { get set }
-    
-}
 
-final class HomeInteractor: HomeDataStore {
-    
-    // Data store logic
-    //var name: String = ""
-    
+// MARK: - HomeInteractor
+final class HomeInteractor {
+ 
     //MARK: Dependencies
-    private var presenter: HomePresentationLogic?
-    private var worker: HomeWorker?
+    private let presenter: HomePresentationLogic
+    private let worker: HomeWorker
     
-    init(presenter: HomePresentationLogic? = nil, worker: HomeWorker? = nil) {
+    init(presenter: HomePresentationLogic, worker: HomeWorker) {
         self.presenter = presenter
         self.worker = worker
     }
@@ -35,8 +28,20 @@ final class HomeInteractor: HomeDataStore {
 }
 
 
+// MARK: - HomeInteractor: HomeBusinessLogic
 extension HomeInteractor: HomeBusinessLogic {
+    func fetchFeatures(request: HomeModels.FetchFeatures.Request) {
+        worker.fetchFeatures { [weak self] result in
+            guard let self = self else { return }
+            switch result {
     
+            case .success(let features):
+                presenter.presentFetchFeatures(response: HomeModels.FetchFeatures.Response(features: features))
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
 }
 
 

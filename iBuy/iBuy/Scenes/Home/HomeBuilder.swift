@@ -1,8 +1,8 @@
 //
 //  HomeBuilder.swift
-//  e-commerceApp
+//  iBuy
 //
-//  Created by Baran Baran on 18.08.2024.
+//  Created by Baran Baran on 28.08.2024.
 //
 
 
@@ -11,7 +11,8 @@ import Foundation
 
 enum HomeBuilder {
     static func build() -> HomeViewController {
-        let worker = HomeWorker()
+        let service = FirebaseService()
+        let worker = HomeWorker(service: service)
         let presenter = HomePresenter()
         let router = HomeRouter()
         let interactor = HomeInteractor(presenter: presenter, worker: worker)
@@ -20,7 +21,7 @@ enum HomeBuilder {
         //viewController referansı burada ayarlanıyor
         presenter.controller = vc
         router.controller = vc
-        router.dataStore = interactor
+      
         
         return vc
         

@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
-
+// MARK: - HomeNetworkWorker Protocol
 protocol HomeNetworkWorker {
     func fetchFeatures(completion: @escaping (Result<[FeatureResponse], ServiceError>) -> Void)
 }
 
+// MARK: - HomeWorker
 final class HomeWorker {
     
     //MARK: Dependencies

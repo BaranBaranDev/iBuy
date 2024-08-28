@@ -226,9 +226,9 @@
 				BE0548942C72125400EEF408 /* HomeViewController.swift */,
 				BE0548932C72125400EEF408 /* HomeModels.swift */,
 				BE0548912C72125400EEF408 /* HomeWorker.swift */,
+				BE0548962C72125400EEF408 /* HomeInteractor.swift */,
 				BE0548902C72125400EEF408 /* HomePresenter.swift */,
 				BE0548922C72125400EEF408 /* HomeRouter.swift */,
-				BE0548962C72125400EEF408 /* HomeInteractor.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
