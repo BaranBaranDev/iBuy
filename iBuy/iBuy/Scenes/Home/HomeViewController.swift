@@ -19,7 +19,8 @@ protocol HomeDisplayLogic: AnyObject {
 final class HomeViewController: UIViewController {
     
     // MARK: - Properties
-    private(set) var features: [FeatureResponse] = []
+    private var features: [FeatureResponse] = []
+    private var categories = Category.allCategories
     
     private let interactor: HomeBusinessLogic
     private let router: HomeRoutingLogic
@@ -110,7 +111,7 @@ extension HomeViewController: UICollectionViewDataSource {
         case .featured:
             return features.count
         case .category:
-            return 5
+            return categories.count
         case .products:
             return 7
         }
@@ -123,10 +124,13 @@ extension HomeViewController: UICollectionViewDataSource {
         case .featured:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseID.featureCell, for: indexPath) as? FeatureCell else { return UICollectionViewCell() }
             let model = features[indexPath.item]
-            cell.configure(for: model)
+            cell.configure(with: model)
             return cell
+            
         case .category:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseID.categoryCell, for: indexPath) as? CategoryCell else { return UICollectionViewCell() }
+            let categoryItem = categories[indexPath.item]
+            cell.configure(with: categoryItem)
             return cell
         case .products:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseID.productCell, for: indexPath) as? ProductCell else { return UICollectionViewCell() }

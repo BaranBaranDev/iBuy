@@ -15,49 +15,44 @@ final class FeatureCell: UICollectionViewCell {
     // MARK: - UI Elements
     
     private lazy var backgroundImageView: UIImageView = {
-        let imageView = UIImageView(frame: contentView.bounds)
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 10
-        return imageView
+        return ImageFactory.build(contentMode: .scaleAspectFit)
     }()
     
-    
-    
-    private lazy var titleLabel: UILabel = LabelFactory.build(
-        text: nil,
-        font: UIFont.boldSystemFont(ofSize: 30)
-    )
-    
+    private lazy var titleLabel: UILabel = {
+        return LabelFactory.build(
+            font: UIFont.boldSystemFont(ofSize: 30)
+        )
+    }()
     
     private lazy var detailButton: UIButton = {
-        let btn = UIButton(type: .system)
-        btn.setTitle("Learn More", for: .normal)
-        btn.tintColor = .white
-        btn.backgroundColor = .systemBlue
-        btn.layer.cornerRadius = 16
-        return btn
+        return ButtonFactory.build(
+            title: "Learn More",
+            titleColor: .white,
+            backgroundColor: .systemBlue,
+            cornerRadius: 16
+        )
     }()
+    
     
     private lazy var buyButton: UIButton = {
-        let btn = UIButton(type: .system)
-        btn.setTitle("Buy", for: .normal)
-        btn.backgroundColor = .clear
-        btn.layer.borderColor = UIColor.systemBlue.cgColor
-        btn.layer.borderWidth = 2
-        btn.layer.cornerRadius = 16
-        btn.setTitleColor(.systemBlue, for: .normal)
-        return btn
+        return ButtonFactory.build(
+            title: "Buy",
+            titleColor: .systemBlue,
+            backgroundColor: .clear,
+            cornerRadius: 16,
+            borderWidth: 2,
+            borderColor: .systemBlue
+        )
     }()
-    
     
     
     private lazy var buttonStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [detailButton, buyButton])
-        stackView.axis = .horizontal
-        stackView.spacing = 8
-        stackView.distribution = .equalCentering
-        return stackView
+        return StackViewFactory.build(
+            views: [detailButton,buyButton],
+            axis: .horizontal,
+            distribution: .equalCentering,
+            spacing: 8
+        )
     }()
     
     
@@ -121,7 +116,7 @@ private extension FeatureCell {
 // MARK: - Configure
 extension FeatureCell {
     
-    public func configure(for model: FeatureResponse?) {
+    public func configure(with model: FeatureResponse?) {
         guard let model = model else { return } // != nil
         
         configureBackgroundImage(model)

@@ -7,25 +7,6 @@
 
 import UIKit
 
-// MARK: - SectionType Enum
- enum SectionType: Int, CaseIterable {
-    case featured = 0
-    case category = 1
-    case products = 2
-    
-    var sectionTitle: String {
-        switch self {
-        case .featured:
-            return "Featured"
-        case .category:
-            return "Category"
-        case .products:
-            return "Products"
-        }
-    }
-}
-
-
 // MARK: - HomeSectionFactory
 /// Factory class for creating layout sections in the home view.
 final class HomeSectionFactory {
