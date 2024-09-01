@@ -11,6 +11,7 @@ import FirebaseFirestore
 // MARK: - HomeNetworkWorker Protocol
 protocol HomeNetworkWorker {
     func fetchFeatures(completion: @escaping (Result<[FeatureResponse], ServiceError>) -> Void)
+    func fetchProducts(with categoryName: String,completion: @escaping (Result<[ProductResponse], ServiceError>) -> Void)
 }
 
 // MARK: - HomeWorker
@@ -31,4 +32,9 @@ extension HomeWorker: HomeNetworkWorker {
     func fetchFeatures(completion: @escaping (Result<[FeatureResponse], ServiceError>) -> Void) {
         service.fetchData(collectionName: "features", completion: completion)
     }
+    
+    func fetchProducts(with categoryName: String, completion: @escaping (Result<[ProductResponse], ServiceError>) -> Void) {
+        service.fetchData(collectionName: categoryName, completion: completion)
+    }
+    
 }

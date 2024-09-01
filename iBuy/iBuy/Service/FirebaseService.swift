@@ -19,13 +19,9 @@ protocol ServiceProtocol {
 // MARK: - FirebaseService Class
 final class FirebaseService {
     
-     //MARK: Dependencies
+    //MARK: Private Properties
     private let db = Firestore.firestore()
-/*
-    init(db: Firestore = Firestore.firestore()) {
-        self.db = db
-    }
-    **/
+
 }
 
 // MARK: - FirebaseService:  ServiceProtocol

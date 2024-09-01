@@ -10,10 +10,18 @@ import Foundation
 // MARK: - iBuyModel
 struct iBuyModel: Codable {
     let features: [FeatureResponse]
+    let categories : [ProductResponse]
 }
 
 // MARK: - FeatureResponse
 struct FeatureResponse: Codable {
-    let title: String?
+    let name: String?
+    let url: String
+}
+
+// MARK: - ProductsResponse
+struct ProductResponse: Codable {
+    let name: String
+    let price: Int
     let url: String
 }

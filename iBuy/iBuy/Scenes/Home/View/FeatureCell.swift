@@ -91,13 +91,14 @@ private extension FeatureCell {
     }
     
     func layout() {
+
         buttonStackView.snp.makeConstraints { make in
             make.bottom.equalTo(backgroundImageView.snp.bottomMargin)
             make.centerX.equalToSuperview()
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(buttonStackView.snp.topMargin)
+            make.bottom.equalTo(buttonStackView.snp.top).offset(-8)
             make.centerX.equalToSuperview()
         }
         
@@ -130,7 +131,7 @@ extension FeatureCell {
     }
     
     private func configureTitleLabel(_ model: FeatureResponse){
-        titleLabel.text = model.title
+        titleLabel.text = model.name
     }
     
 }

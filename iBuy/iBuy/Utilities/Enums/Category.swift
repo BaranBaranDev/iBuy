@@ -18,7 +18,7 @@ enum Category {
     var name: String {
         switch self {
         case .macbook: return "MacBook"
-        case .iphone: return "iPhone"
+        case .iphone: return "Iphone"
         case .accessories: return "Accessories"
         case .visionPro: return "Vision Pro"
         case .watches: return "Watches"
@@ -29,7 +29,7 @@ enum Category {
         switch self {
         case .macbook: return "macbook"
         case .iphone: return "iphone"
-        case .accessories: return "airpodspro.chargingcase.wireless"
+        case .accessories: return "airpodspro.chargingcase.wireless.fill"
         case .visionPro: return "visionpro"
         case .watches: return "applewatch"
         }

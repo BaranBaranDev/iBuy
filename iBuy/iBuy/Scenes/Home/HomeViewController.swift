@@ -11,6 +11,7 @@ import FirebaseFirestore
 // MARK: - HomeDisplayLogic Protocol
 protocol HomeDisplayLogic: AnyObject {
     func display(viewModel: HomeModels.FetchFeatures.ViewModel)
+    func display(viewModel: HomeModels.FetchProducts.ViewModel)
 }
 
 
@@ -19,8 +20,9 @@ protocol HomeDisplayLogic: AnyObject {
 final class HomeViewController: UIViewController {
     
     // MARK: - Properties
-    private var features: [FeatureResponse] = []
-    private var categories = Category.allCategories
+    private lazy var features: [FeatureResponse] = []
+    private lazy var categories = Category.allCategories
+    private lazy var products : [ProductResponse] = []
     
     private let interactor: HomeBusinessLogic
     private let router: HomeRoutingLogic
@@ -86,11 +88,17 @@ final class HomeViewController: UIViewController {
 // MARK: - HomeViewController: HomeDisplayLogic
 extension HomeViewController: HomeDisplayLogic {
     func display(viewModel: HomeModels.FetchFeatures.ViewModel) {
-        
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.features = viewModel.features
-
+            homeCollectionView.reloadData()
+        }
+    }
+    
+    func display(viewModel: HomeModels.FetchProducts.ViewModel) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.products = viewModel.products
             homeCollectionView.reloadData()
         }
     }
@@ -113,7 +121,7 @@ extension HomeViewController: UICollectionViewDataSource {
         case .category:
             return categories.count
         case .products:
-            return 7
+            return products.count
         }
     }
     
@@ -134,6 +142,9 @@ extension HomeViewController: UICollectionViewDataSource {
             return cell
         case .products:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseID.productCell, for: indexPath) as? ProductCell else { return UICollectionViewCell() }
+            let productItem = products[indexPath.item]
+            //
+            cell.configure(with: productItem)
             return cell
         }
     }
@@ -149,7 +160,21 @@ extension HomeViewController: UICollectionViewDataSource {
 
 // MARK: - UICollectionViewDelegate
 extension HomeViewController: UICollectionViewDelegate {
-    // Implement necessary delegate methods if needed
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let sectionType = SectionType(rawValue: indexPath.section) else { return }
+        switch sectionType {
+        case .featured:
+            // Featured item selection logic
+            break
+        case .category:
+            let selectedCategoryName = categories[indexPath.item].name
+            print(selectedCategoryName)
+            interactor.fetchProducts(request: HomeModels.FetchProducts.Request(categoryName: selectedCategoryName))
+        case .products:
+            // Product item selection logic
+            break
+        }
+    }
 }
 
 // MARK: - Preview
