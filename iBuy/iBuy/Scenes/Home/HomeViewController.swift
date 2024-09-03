@@ -25,7 +25,8 @@ final class HomeViewController: UIViewController {
     private lazy var products : [ProductResponse] = []
     
     //MARK: Dependencies
-    private let interactor: HomeBusinessLogic
+    typealias InteractorType = HomeBusinessLogic & HomeDataStore
+    private var interactor: InteractorType
     private let router: HomeRoutingLogic
     
     // MARK: - UI Elements
@@ -40,7 +41,7 @@ final class HomeViewController: UIViewController {
     }()
     
     // MARK: - Initialization
-    init(interactor: HomeBusinessLogic, router: HomeRoutingLogic) {
+    init(interactor: InteractorType, router: HomeRoutingLogic) {
         self.interactor = interactor
         self.router = router
         super.init(nibName: nil, bundle: nil)
@@ -144,7 +145,6 @@ extension HomeViewController: UICollectionViewDataSource {
         case .products:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseID.productCell, for: indexPath) as? ProductCell else { return UICollectionViewCell() }
             let productItem = products[indexPath.item]
-            //
             cell.configure(with: productItem)
             return cell
         }
@@ -169,11 +169,11 @@ extension HomeViewController: UICollectionViewDelegate {
             break
         case .category:
             let selectedCategoryName = categories[indexPath.item].name
-            print(selectedCategoryName)
             interactor.fetchProducts(request: HomeModels.FetchProducts.Request(categoryName: selectedCategoryName))
         case .products:
-            // Product item selection logic
-            break
+            let selectedProduct = products[indexPath.item]
+            interactor.selectedProduct = selectedProduct
+            router.routeDetail()
         }
     }
 }

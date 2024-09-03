@@ -19,25 +19,30 @@ protocol DetailDisplayLogic: AnyObject {
 final class DetailViewController: UIViewController{
     
     // MARK:  Properties
-
+    private var product: ProductResponse?
 
     //MARK:  Dependencies
-    private let interactor : DetailBusinessLogic & DetailDataStore
+    typealias InteractorType = DetailBusinessLogic & DetailDataStore
+    private let interactor : InteractorType
     private let router : DetailRoutingLogic
 
     
     // MARK: - UI Elements
     
-    private let productView: UIView = {
-        return ProductView()
+    private lazy var productView: UIView = {
+        let view = ProductView()
+        view.configure(with: product)
+        
+        return view
     }()
     
     
     // MARK: - İnitialization
     
-    init(interactor: DetailBusinessLogic & DetailDataStore, router: DetailRoutingLogic) {
+    init(interactor: InteractorType, router: DetailRoutingLogic, selectedProduct: ProductResponse?) {
         self.interactor = interactor
         self.router = router
+        self.product = selectedProduct
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -57,6 +62,7 @@ final class DetailViewController: UIViewController{
         super.viewDidLoad()
         setup()
         layout()
+        
 
         
     }
@@ -83,5 +89,5 @@ extension DetailViewController: DetailDisplayLogic {
 
 
 #Preview {
-    DetailBuilder.build()
+    MainVC()
 }

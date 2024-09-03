@@ -9,7 +9,7 @@ import UIKit
 
 final class ProductView: UIView {
     
-    // MARK: - UI Elemanları
+    // MARK: - UI Elements
     private lazy var productImageView: UIImageView = {
         ImageFactory.build(
             imageName: "macbook",
@@ -41,11 +41,11 @@ final class ProductView: UIView {
         )
     }()
     
-    // MARK: - Başlatma
+    // MARK: - İnitialization
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
-        setupConstraints()
+        layout()
     }
     
     required init?(coder: NSCoder) {
@@ -56,14 +56,16 @@ final class ProductView: UIView {
 // MARK: - Setup
 private extension ProductView {
     func setup() {
-        backgroundColor = .clear
+        backgroundColor = .systemBackground
         addSubview(productImageView)
         addSubview(labelStackView)
         addSubview(cartButton)
     }
-    
-    // MARK: - Constraintler
-    func setupConstraints() {
+}
+
+// MARK: - Layout
+private extension ProductView {
+    func layout() {
         productImageView.snp.makeConstraints { make in
             make.top.equalTo(self.snp.topMargin)
             make.trailing.equalTo(self.snp.trailingMargin)
@@ -86,6 +88,19 @@ private extension ProductView {
     }
 }
 
-#Preview {
-    DetailBuilder.build()
+// MARK: - Configure
+extension ProductView {
+    public func configure(with product: ProductResponse?) {
+        guard let product = product else { return }
+        
+        // Asynchronous update of the UI elements on the main thread
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.productNameLabel.text = product.name
+            self.productPriceLabel.text = String(product.price)
+            if let url = URL(string: product.url) {
+                self.productImageView.sd_setImage(with: url)
+            }
+        }
+    }
 }

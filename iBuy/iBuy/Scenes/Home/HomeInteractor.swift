@@ -13,9 +13,17 @@ protocol HomeBusinessLogic {
     func fetchProducts(request: HomeModels.FetchProducts.Request)
 }
 
+// MARK: - HomeDataStore
+protocol HomeDataStore {
+    var selectedProduct: ProductResponse? { get set }
+}
 
 // MARK: - HomeInteractor
-final class HomeInteractor {
+final class HomeInteractor: HomeDataStore {
+    
+    // MARK: - DataStore Logic
+    var selectedProduct: ProductResponse?
+    
  
     //MARK: Dependencies
     private let presenter: HomePresentationLogic
