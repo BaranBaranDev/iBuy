@@ -42,6 +42,14 @@
 		BE8A2BFD2C7A06DA000BBF3F /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = BE8A2BFC2C7A06DA000BBF3F /* SDWebImage */; };
 		BE8A2BFF2C7A1E4E000BBF3F /* LabelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8A2BFE2C7A1E4E000BBF3F /* LabelFactory.swift */; };
 		BE8A2C012C7A2235000BBF3F /* ButtonFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8A2C002C7A2235000BBF3F /* ButtonFactory.swift */; };
+		BEBA2FA72C875F39007D2DB0 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBA2FA02C875F39007D2DB0 /* DetailPresenter.swift */; };
+		BEBA2FA82C875F39007D2DB0 /* DetailWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBA2FA12C875F39007D2DB0 /* DetailWorker.swift */; };
+		BEBA2FA92C875F39007D2DB0 /* DetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBA2FA22C875F39007D2DB0 /* DetailRouter.swift */; };
+		BEBA2FAA2C875F39007D2DB0 /* DetailModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBA2FA32C875F39007D2DB0 /* DetailModels.swift */; };
+		BEBA2FAB2C875F39007D2DB0 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBA2FA42C875F39007D2DB0 /* DetailViewController.swift */; };
+		BEBA2FAC2C875F39007D2DB0 /* DetailBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBA2FA52C875F39007D2DB0 /* DetailBuilder.swift */; };
+		BEBA2FAD2C875F39007D2DB0 /* DetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBA2FA62C875F39007D2DB0 /* DetailInteractor.swift */; };
+		BEBA2FB02C87621D007D2DB0 /* ProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBA2FAF2C87621D007D2DB0 /* ProductView.swift */; };
 		BEDC794C2C80C4DA00AA1F15 /* ImageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDC794B2C80C4DA00AA1F15 /* ImageFactory.swift */; };
 		BEF63B9A2C837D5E0072E625 /* StackViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF63B992C837D5E0072E625 /* StackViewFactory.swift */; };
 		BEF63B9C2C83848B0072E625 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF63B9B2C83848B0072E625 /* Category.swift */; };
@@ -76,6 +84,14 @@
 		BE88F1A62C6CC78E006AAA84 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		BE8A2BFE2C7A1E4E000BBF3F /* LabelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelFactory.swift; sourceTree = "<group>"; };
 		BE8A2C002C7A2235000BBF3F /* ButtonFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonFactory.swift; sourceTree = "<group>"; };
+		BEBA2FA02C875F39007D2DB0 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
+		BEBA2FA12C875F39007D2DB0 /* DetailWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWorker.swift; sourceTree = "<group>"; };
+		BEBA2FA22C875F39007D2DB0 /* DetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRouter.swift; sourceTree = "<group>"; };
+		BEBA2FA32C875F39007D2DB0 /* DetailModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailModels.swift; sourceTree = "<group>"; };
+		BEBA2FA42C875F39007D2DB0 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		BEBA2FA52C875F39007D2DB0 /* DetailBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailBuilder.swift; sourceTree = "<group>"; };
+		BEBA2FA62C875F39007D2DB0 /* DetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInteractor.swift; sourceTree = "<group>"; };
+		BEBA2FAF2C87621D007D2DB0 /* ProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductView.swift; sourceTree = "<group>"; };
 		BEDC794B2C80C4DA00AA1F15 /* ImageFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFactory.swift; sourceTree = "<group>"; };
 		BEF63B992C837D5E0072E625 /* StackViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewFactory.swift; sourceTree = "<group>"; };
 		BEF63B9B2C83848B0072E625 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -214,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				BE88F1A92C6CCF50006AAA84 /* Home */,
+				BEBA2F9F2C875A5E007D2DB0 /* Detail */,
 				BE88F1AA2C6CCF5A006AAA84 /* Cart */,
 			);
 			path = Scenes;
@@ -247,6 +264,29 @@
 			children = (
 			);
 			path = Cart;
+			sourceTree = "<group>";
+		};
+		BEBA2F9F2C875A5E007D2DB0 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				BEBA2FAE2C8761ED007D2DB0 /* View */,
+				BEBA2FA52C875F39007D2DB0 /* DetailBuilder.swift */,
+				BEBA2FA42C875F39007D2DB0 /* DetailViewController.swift */,
+				BEBA2FA02C875F39007D2DB0 /* DetailPresenter.swift */,
+				BEBA2FA12C875F39007D2DB0 /* DetailWorker.swift */,
+				BEBA2FA22C875F39007D2DB0 /* DetailRouter.swift */,
+				BEBA2FA32C875F39007D2DB0 /* DetailModels.swift */,
+				BEBA2FA62C875F39007D2DB0 /* DetailInteractor.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		BEBA2FAE2C8761ED007D2DB0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BEBA2FAF2C87621D007D2DB0 /* ProductView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		BEF63B9D2C8386B70072E625 /* Utilities */ = {
@@ -358,13 +398,18 @@
 			files = (
 				BE88F1A72C6CC78E006AAA84 /* MainVC.swift in Sources */,
 				BE0548992C72125400EEF408 /* HomeRouter.swift in Sources */,
+				BEBA2FA72C875F39007D2DB0 /* DetailPresenter.swift in Sources */,
 				BE88F18E2C6CC587006AAA84 /* AppDelegate.swift in Sources */,
+				BEBA2FB02C87621D007D2DB0 /* ProductView.swift in Sources */,
 				BE8A2BFF2C7A1E4E000BBF3F /* LabelFactory.swift in Sources */,
 				BE24F7032C74BB1B0049D440 /* CategoryCell.swift in Sources */,
 				BE5BE7942C79241200025994 /* FirebaseService.swift in Sources */,
 				BE8A2C012C7A2235000BBF3F /* ButtonFactory.swift in Sources */,
+				BEBA2FAC2C875F39007D2DB0 /* DetailBuilder.swift in Sources */,
+				BEBA2FAA2C875F39007D2DB0 /* DetailModels.swift in Sources */,
 				BE24F7052C74BB260049D440 /* ProductCell.swift in Sources */,
 				BE0B29842C737FEE00A13C83 /* CGFloat+Ext.swift in Sources */,
+				BEBA2FAD2C875F39007D2DB0 /* DetailInteractor.swift in Sources */,
 				BE05489D2C72125400EEF408 /* HomeInteractor.swift in Sources */,
 				BEF63B9A2C837D5E0072E625 /* StackViewFactory.swift in Sources */,
 				BE24F70A2C74CFE70049D440 /* FeatureCell.swift in Sources */,
@@ -373,14 +418,17 @@
 				BE05489B2C72125400EEF408 /* HomeViewController.swift in Sources */,
 				BE0548982C72125400EEF408 /* HomeWorker.swift in Sources */,
 				BEF63B9C2C83848B0072E625 /* Category.swift in Sources */,
+				BEBA2FAB2C875F39007D2DB0 /* DetailViewController.swift in Sources */,
 				BE5BE7912C79175000025994 /* iBuyModel.swift in Sources */,
 				BE076C312C7609EE0086D3AA /* HomeSectionFactory.swift in Sources */,
 				BE05489C2C72125400EEF408 /* HomeBuilder.swift in Sources */,
 				BE0548972C72125400EEF408 /* HomePresenter.swift in Sources */,
 				BE4C7F092C7CE90A00DE88BD /* ServiceError.swift in Sources */,
+				BEBA2FA92C875F39007D2DB0 /* DetailRouter.swift in Sources */,
 				BE05489A2C72125400EEF408 /* HomeModels.swift in Sources */,
 				BEF63BA02C8387280072E625 /* SectionType.swift in Sources */,
 				BE076C2D2C75E62C0086D3AA /* HeaderView.swift in Sources */,
+				BEBA2FA82C875F39007D2DB0 /* DetailWorker.swift in Sources */,
 				BE4C7F072C7CE8B200DE88BD /* FirebaseConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

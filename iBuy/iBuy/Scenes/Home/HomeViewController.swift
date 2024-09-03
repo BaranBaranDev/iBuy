@@ -24,6 +24,7 @@ final class HomeViewController: UIViewController {
     private lazy var categories = Category.allCategories
     private lazy var products : [ProductResponse] = []
     
+    //MARK: Dependencies
     private let interactor: HomeBusinessLogic
     private let router: HomeRoutingLogic
     
