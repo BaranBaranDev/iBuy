@@ -12,11 +12,6 @@ protocol DetailRoutingLogic {
   
 }
 
-protocol DetailDataPassing {
-  var dataStore: DetailDataStore? { get }
-}
-
-
 
 final class DetailRouter:  DetailDataPassing {
     

@@ -11,12 +11,20 @@ import UIKit
 enum DetailModels {
   // MARK: Use cases
   
-  enum Something {
-      struct Request {}
+  enum SaveProduct {
+      struct Request {
+          let productName: String
+          let productPrice: Int
+          let productUrl: String
+      }
 
-      struct Response {}
+      struct Response {
+          let success: Bool
+      }
 
-      struct ViewModel {}
+      struct ViewModel {
+          let successMessage: String
+      }
 
   }
 }

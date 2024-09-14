@@ -8,34 +8,35 @@
 
 import Foundation
 
+// MARK: - DetailBusinessLogic
 protocol DetailBusinessLogic {
-    
-    
+    func saveProduct(name: String, price: Int, url: String)
 }
 
-protocol DetailDataStore {
-    //var name: String { get set }
-    
-}
-
-final class DetailInteractor: DetailDataStore {
-    
-    // Data store logic
-    //var name: String = ""
+// MARK: - DetailInteractor
+final class DetailInteractor {
     
     //MARK: Dependencies
     private let presenter: DetailPresentationLogic
-    private let worker: DetailWorker
+    private let worker: DetailDataWorker
     
-    init(presenter: DetailPresentationLogic, worker: DetailWorker) {
+    init(presenter: DetailPresentationLogic, worker: DetailDataWorker) {
         self.presenter = presenter
         self.worker = worker
     }
-
+    
 }
 
 
 extension DetailInteractor: DetailBusinessLogic {
+    func saveProduct(name: String, price: Int, url: String) {
+        let request = DetailModels.SaveProduct.Request(productName: name, productPrice: price, productUrl: url)
+        worker.saveProduct(name: request.productName , price: request.productPrice, url: request.productUrl)
+        
+        let response = DetailModels.SaveProduct.Response(success: true)
+        presenter.present(response: response)
+    }
+    
     
 }
 

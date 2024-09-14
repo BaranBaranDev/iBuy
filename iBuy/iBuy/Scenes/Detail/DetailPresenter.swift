@@ -9,7 +9,7 @@
 import UIKit
 
 protocol DetailPresentationLogic {
-        
+    func present(response: DetailModels.SaveProduct.Response)
 }
 
 
@@ -23,5 +23,8 @@ final class DetailPresenter {
 
 
 extension DetailPresenter: DetailPresentationLogic {
-    
+    func present(response: DetailModels.SaveProduct.Response) {
+        let viewModel = DetailModels.SaveProduct.ViewModel(successMessage: "Saved Database")
+        controller?.display(viewModel: viewModel)
+    }
 }

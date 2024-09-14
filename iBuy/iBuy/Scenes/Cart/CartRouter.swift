@@ -12,16 +12,11 @@ protocol CartRoutingLogic {
   
 }
 
-protocol CartDataPassing {
-  var dataStore: CartDataStore? { get }
-}
 
 
-
-final class CartRouter:  CartDataPassing {
+final class CartRouter {
     
   weak var controller: CartViewController?
-  var dataStore: CartDataStore?
 
 }
 

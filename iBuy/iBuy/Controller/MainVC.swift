@@ -21,7 +21,7 @@ private extension MainVC {
         
         // Create VC
         let homeVC = createViewController(rootVC: HomeBuilder.build(), title: "Home", image: "house")
-        let cartVC = createViewController(rootVC: AppsVC(), title: "My Cart", image: "cart")
+        let cartVC = createViewController(rootVC: CartBuilder.build(), title: "My Cart", image: "cart")
         
         
         // Add tabbar
@@ -67,16 +67,5 @@ private extension MainVC {
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().compactAppearance = appearance
         UINavigationBar.appearance().compactScrollEdgeAppearance = appearance
-    }
-}
-
-// MARK: - VC
-
-
-
-final class AppsVC: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .systemOrange
     }
 }

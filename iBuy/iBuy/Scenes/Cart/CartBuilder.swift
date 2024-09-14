@@ -11,7 +11,8 @@ import Foundation
 
 enum CartBuilder {
     static func build() -> CartViewController {
-        let worker = CartWorker()
+        let service = CoreDataService()
+        let worker = CartWorker(service: service)
         let presenter = CartPresenter()
         let router = CartRouter()
         let interactor = CartInteractor(presenter: presenter, worker: worker)
@@ -20,7 +21,7 @@ enum CartBuilder {
         //viewController referansı burada ayarlanıyor
         presenter.controller = vc
         router.controller = vc
-        router.dataStore = interactor
+       
         
         return vc
         

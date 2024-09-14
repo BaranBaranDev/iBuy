@@ -10,8 +10,7 @@ import UIKit
 
 
 protocol DetailDisplayLogic: AnyObject {
-    
-   // func display(viewModel: DetailModels.Something.ViewModel)
+    func display(viewModel: DetailModels.SaveProduct.ViewModel)
 }
 
 
@@ -22,9 +21,8 @@ final class DetailViewController: UIViewController{
     private var product: ProductResponse?
 
     //MARK:  Dependencies
-    typealias InteractorType = DetailBusinessLogic & DetailDataStore
+    typealias InteractorType = DetailBusinessLogic
     private let interactor : InteractorType
-    private let router : DetailRoutingLogic
 
     
     // MARK: - UI Elements
@@ -39,9 +37,8 @@ final class DetailViewController: UIViewController{
     
     // MARK: - İnitialization
     
-    init(interactor: InteractorType, router: DetailRoutingLogic, selectedProduct: ProductResponse?) {
+    init(interactor: InteractorType, selectedProduct: ProductResponse?) {
         self.interactor = interactor
-        self.router = router
         self.product = selectedProduct
         super.init(nibName: nil, bundle: nil)
     }
@@ -62,6 +59,7 @@ final class DetailViewController: UIViewController{
         super.viewDidLoad()
         setup()
         layout()   
+        
     }
  
     
@@ -77,17 +75,22 @@ final class DetailViewController: UIViewController{
         
     }
 }
-
-
-// MARK: - DetailDisplayLogic
-
-extension DetailViewController: DetailDisplayLogic {
-
-}
-
+// MARK: - DetailViewController: ProductViewDelegate
 extension DetailViewController: ProductViewDelegate {
     func didTappedAddToCartButton() {
-        print("Click: $\(product?.name)")
+        guard let product = product else { return }
+        interactor.saveProduct(
+            name: product.name,
+            price: product.price,
+            url: product.url
+        )
+    }
+}
+
+// MARK: - DetailDisplayLogic
+extension DetailViewController: DetailDisplayLogic {
+    func display(viewModel: DetailModels.SaveProduct.ViewModel) {
+        print(viewModel.successMessage)
     }
 }
 

@@ -8,11 +8,10 @@
 import Foundation
 
 struct ReuseID {
-    // Home
     static let categoryCell: String = "CategoryCell"
     static let productCell: String = "ProductCell"
     static let featureCell: String = "FeatureCell"
     static let headerView: String = "HeaderView"
+    static let cartCell: String = "CartCell"
     
-    // Cart
 }
