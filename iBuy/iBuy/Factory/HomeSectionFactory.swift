@@ -7,25 +7,6 @@
 
 import UIKit
 
-// MARK: - SectionType Enum
- enum SectionType: Int, CaseIterable {
-    case featured = 0
-    case category = 1
-    case products = 2
-    
-    var sectionTitle: String {
-        switch self {
-        case .featured:
-            return "Featured"
-        case .category:
-            return "Category"
-        case .products:
-            return "Products"
-        }
-    }
-}
-
-
 // MARK: - HomeSectionFactory
 /// Factory class for creating layout sections in the home view.
 final class HomeSectionFactory {
@@ -59,8 +40,8 @@ private extension HomeSectionFactory {
     }
 
     static func createCategorySection() -> NSCollectionLayoutSection {
-        let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(0.8), heightDimension: .fractionalHeight(0.5)))
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .absolute(.screenHeight / 5))
+        let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.5)))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.4), heightDimension: .absolute(.screenHeight * 0.30))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary

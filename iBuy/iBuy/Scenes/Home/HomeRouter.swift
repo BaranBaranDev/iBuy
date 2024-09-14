@@ -8,19 +8,36 @@
 
 import UIKit
 
+// MARK: - HomeRoutingLogic
 protocol HomeRoutingLogic {
-  
+  func routeDetail()
+}
+
+// MARK: - HomeDataPassing
+protocol HomeDataPassing {
+    var dataStore: HomeDataStore? { get }
 }
 
 
-
-final class HomeRouter {
+// MARK: - HomeRouter Class
+final class HomeRouter: HomeDataPassing {
     
+  // MARK: Properties
+  var dataStore: HomeDataStore?
   weak var controller: HomeViewController?
 }
 
 
-
+// MARK: - HomeRouter: HomeRoutingLogic
 extension HomeRouter: HomeRoutingLogic {
+    func routeDetail() {
+        guard let selectedProduct = dataStore?.selectedProduct else { return }
+        
+        let vc = DetailBuilder.build(selectedProduct: selectedProduct)
+        controller?.navigationController?.pushViewController(vc, animated: true)
+        
+        
+    }
+    
     
 }

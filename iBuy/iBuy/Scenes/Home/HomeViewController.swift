@@ -11,17 +11,20 @@ import FirebaseFirestore
 // MARK: - HomeDisplayLogic Protocol
 protocol HomeDisplayLogic: AnyObject {
     func display(viewModel: HomeModels.FetchFeatures.ViewModel)
+    func display(viewModel: HomeModels.FetchProducts.ViewModel)
 }
-
-
 
 // MARK: - HomeViewController
 final class HomeViewController: UIViewController {
     
     // MARK: - Properties
-    private(set) var features: [FeatureResponse] = []
+    private lazy var features: [FeatureResponse] = []
+    private lazy var categories = Category.allCategories
+    private lazy var products : [ProductResponse] = []
     
-    private let interactor: HomeBusinessLogic
+    //MARK: Dependencies
+    typealias InteractorType = HomeBusinessLogic & HomeDataStore
+    private var interactor: InteractorType
     private let router: HomeRoutingLogic
     
     // MARK: - UI Elements
@@ -36,15 +39,14 @@ final class HomeViewController: UIViewController {
     }()
     
     // MARK: - Initialization
-    init(interactor: HomeBusinessLogic, router: HomeRoutingLogic) {
+    init(interactor: InteractorType, router: HomeRoutingLogic) {
         self.interactor = interactor
         self.router = router
         super.init(nibName: nil, bundle: nil)
-        
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError()
     }
     
     // MARK: - LifeCycle
@@ -85,11 +87,17 @@ final class HomeViewController: UIViewController {
 // MARK: - HomeViewController: HomeDisplayLogic
 extension HomeViewController: HomeDisplayLogic {
     func display(viewModel: HomeModels.FetchFeatures.ViewModel) {
-        
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.features = viewModel.features
-
+            homeCollectionView.reloadData()
+        }
+    }
+    
+    func display(viewModel: HomeModels.FetchProducts.ViewModel) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.products = viewModel.products
             homeCollectionView.reloadData()
         }
     }
@@ -110,9 +118,9 @@ extension HomeViewController: UICollectionViewDataSource {
         case .featured:
             return features.count
         case .category:
-            return 5
+            return categories.count
         case .products:
-            return 7
+            return products.count
         }
     }
     
@@ -123,13 +131,18 @@ extension HomeViewController: UICollectionViewDataSource {
         case .featured:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseID.featureCell, for: indexPath) as? FeatureCell else { return UICollectionViewCell() }
             let model = features[indexPath.item]
-            cell.configure(for: model)
+            cell.configure(with: model)
             return cell
+            
         case .category:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseID.categoryCell, for: indexPath) as? CategoryCell else { return UICollectionViewCell() }
+            let categoryItem = categories[indexPath.item]
+            cell.configure(with: categoryItem)
             return cell
         case .products:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseID.productCell, for: indexPath) as? ProductCell else { return UICollectionViewCell() }
+            let productItem = products[indexPath.item]
+            cell.configure(with: productItem)
             return cell
         }
     }
@@ -145,7 +158,21 @@ extension HomeViewController: UICollectionViewDataSource {
 
 // MARK: - UICollectionViewDelegate
 extension HomeViewController: UICollectionViewDelegate {
-    // Implement necessary delegate methods if needed
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let sectionType = SectionType(rawValue: indexPath.section) else { return }
+        switch sectionType {
+        case .featured:
+            // Featured item selection logic
+            break
+        case .category:
+            let selectedCategoryName = categories[indexPath.item].name
+            interactor.fetchProducts(request: HomeModels.FetchProducts.Request(categoryName: selectedCategoryName))
+        case .products:
+            let selectedProduct = products[indexPath.item]
+            interactor.selectedProduct = selectedProduct
+            router.routeDetail()
+        }
+    }
 }
 
 // MARK: - Preview

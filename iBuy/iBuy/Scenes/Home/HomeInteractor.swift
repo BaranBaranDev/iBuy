@@ -10,11 +10,20 @@ import Foundation
 // MARK: - HomeBusinessLogic
 protocol HomeBusinessLogic {
     func fetchFeatures(request: HomeModels.FetchFeatures.Request)
+    func fetchProducts(request: HomeModels.FetchProducts.Request)
 }
 
+// MARK: - HomeDataStore
+protocol HomeDataStore {
+    var selectedProduct: ProductResponse? { get set }
+}
 
 // MARK: - HomeInteractor
-final class HomeInteractor {
+final class HomeInteractor: HomeDataStore {
+    
+    // MARK: - DataStore Logic
+    var selectedProduct: ProductResponse?
+    
  
     //MARK: Dependencies
     private let presenter: HomePresentationLogic
@@ -36,7 +45,20 @@ extension HomeInteractor: HomeBusinessLogic {
             switch result {
     
             case .success(let features):
-                presenter.presentFetchFeatures(response: HomeModels.FetchFeatures.Response(features: features))
+                presenter.present(response: HomeModels.FetchFeatures.Response(features: features))
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func fetchProducts(request: HomeModels.FetchProducts.Request) {
+        worker.fetchProducts(with: request.categoryName) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+                
+            case .success(let products):
+                presenter.present(response: HomeModels.FetchProducts.Response(products: products))
             case .failure(let error):
                 print(error.localizedDescription)
             }

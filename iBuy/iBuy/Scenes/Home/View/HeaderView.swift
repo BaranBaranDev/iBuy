@@ -40,13 +40,14 @@ final class HeaderView: UICollectionReusableView {
     }
 }
 
-// MARK: - Setup & Layout
+// MARK: - Setup
 private extension HeaderView {
     func setup() {
         addSubview(headerTitle)
-    
     }
-    
+}
+// MARK: - Layout
+private extension HeaderView {
     func layout() {
         headerTitle.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
