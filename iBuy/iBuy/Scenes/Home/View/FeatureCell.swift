@@ -80,8 +80,7 @@ final class FeatureCell: UICollectionViewCell {
         titleLabel.text = nil
     }
 }
-
-// MARK: - Setup & Layout
+// MARK: - Setup
 private extension FeatureCell {
     func setup() {
         addSubview(backgroundImageView)
@@ -89,9 +88,11 @@ private extension FeatureCell {
         backgroundImageView.addSubview(titleLabel)
         
     }
-    
-    func layout() {
+}
 
+// MARK: - Layout
+private extension FeatureCell {
+    func layout() {
         buttonStackView.snp.makeConstraints { make in
             make.bottom.equalTo(backgroundImageView.snp.bottomMargin)
             make.centerX.equalToSuperview()

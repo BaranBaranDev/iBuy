@@ -32,7 +32,7 @@ final class DetailViewController: UIViewController{
     private lazy var productView: UIView = {
         let view = ProductView()
         view.configure(with: product)
-        
+        view.delegate = self
         return view
     }()
     
@@ -61,16 +61,15 @@ final class DetailViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        layout()
-        
-
-        
+        layout()   
     }
  
     
     // MARK: - Setup
     private func setup() {
         view.addSubview(productView)
+        
+       
     }
     
     // MARK: Layout
@@ -84,6 +83,12 @@ final class DetailViewController: UIViewController{
 
 extension DetailViewController: DetailDisplayLogic {
 
+}
+
+extension DetailViewController: ProductViewDelegate {
+    func didTappedAddToCartButton() {
+        print("Click: $\(product?.name)")
+    }
 }
 
 

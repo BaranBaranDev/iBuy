@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 enum ServiceError: Error {
     case noDocuments
     case decodingError(Error)

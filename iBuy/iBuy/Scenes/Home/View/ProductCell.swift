@@ -51,12 +51,15 @@ final class ProductCell: UICollectionViewCell {
     }
 }
 
-// MARK: - Setup & Layout
+// MARK: - Setup
 private extension ProductCell {
     func setup() {
         backgroundColor = .systemBackground
         addSubview(productStackView)
     }
+}
+
+private extension ProductCell {
     
     func layout() {
         productStackView.snp.makeConstraints { make in

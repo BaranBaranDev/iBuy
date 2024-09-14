@@ -14,8 +14,6 @@ protocol HomeDisplayLogic: AnyObject {
     func display(viewModel: HomeModels.FetchProducts.ViewModel)
 }
 
-
-
 // MARK: - HomeViewController
 final class HomeViewController: UIViewController {
     
@@ -45,11 +43,10 @@ final class HomeViewController: UIViewController {
         self.interactor = interactor
         self.router = router
         super.init(nibName: nil, bundle: nil)
-        
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError()
     }
     
     // MARK: - LifeCycle

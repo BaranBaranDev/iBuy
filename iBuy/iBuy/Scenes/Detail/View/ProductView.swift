@@ -7,7 +7,17 @@
 
 import UIKit
 
+// MARK: - ProductViewDelegate
+protocol ProductViewDelegate: AnyObject {
+    func didTappedAddToCartButton()
+}
+
+// MARK: - ProductView
 final class ProductView: UIView {
+    
+    
+    // MARK:  Properties
+    weak var delegate: ProductViewDelegate?
     
     // MARK: - UI Elements
     private lazy var productImageView: UIImageView = {
@@ -33,12 +43,14 @@ final class ProductView: UIView {
     }()
     
     private lazy var cartButton: UIButton = {
-        ButtonFactory.build(
+        let button = ButtonFactory.build(
             title: "Add to Cart",
             titleColor: .white,
             backgroundColor: .systemBlue,
             cornerRadius: 20
         )
+        button.addTarget(self, action: #selector(cartButtonTapped), for: .touchUpInside)
+        return button
     }()
     
     // MARK: - İnitialization
@@ -49,7 +61,7 @@ final class ProductView: UIView {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError()
     }
 }
 
@@ -88,12 +100,18 @@ private extension ProductView {
     }
 }
 
+// MARK: - Actions
+private extension ProductView {
+    @objc func cartButtonTapped() {
+        delegate?.didTappedAddToCartButton()
+    }
+}
+
 // MARK: - Configure
 extension ProductView {
     public func configure(with product: ProductResponse?) {
         guard let product = product else { return }
-        
-        // Asynchronous update of the UI elements on the main thread
+
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.productNameLabel.text = product.name

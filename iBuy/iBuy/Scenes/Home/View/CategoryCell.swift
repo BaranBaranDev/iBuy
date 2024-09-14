@@ -49,14 +49,17 @@ final class CategoryCell: UICollectionViewCell {
     }
 }
 
-// MARK: - Setup & Layout
+// MARK: - Setup
 private extension CategoryCell {
     func setup(){
         backgroundColor = .systemBackground
         addSubview(categoryStackView)
         
     }
-    
+}
+
+// MARK: - Layout
+private extension CategoryCell {
     func layout() {
         categoryStackView.snp.makeConstraints { make in
             make.center.equalToSuperview()

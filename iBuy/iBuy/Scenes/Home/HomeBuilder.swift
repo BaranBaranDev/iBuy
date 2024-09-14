@@ -18,7 +18,6 @@ enum HomeBuilder {
         let interactor = HomeInteractor(presenter: presenter, worker: worker)
         let vc = HomeViewController(interactor: interactor, router: router)
         
-        //viewController referansı burada ayarlanıyor
         presenter.controller = vc
         router.controller = vc
         router.dataStore = interactor

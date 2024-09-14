@@ -212,18 +212,18 @@
 				BE076C2F2C7609970086D3AA /* Factory */,
 				BE88F1A82C6CC793006AAA84 /* Controller */,
 				BE88F1A52C6CC5FE006AAA84 /* Scenes */,
-				BE88F1A42C6CC595006AAA84 /* Files */,
+				BE88F1A42C6CC595006AAA84 /* Resource */,
 			);
 			path = iBuy;
 			sourceTree = "<group>";
 		};
-		BE88F1A42C6CC595006AAA84 /* Files */ = {
+		BE88F1A42C6CC595006AAA84 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
 				BE88F1992C6CC588006AAA84 /* Assets.xcassets */,
 				BE88F19B2C6CC588006AAA84 /* LaunchScreen.storyboard */,
 			);
-			path = Files;
+			path = Resource;
 			sourceTree = "<group>";
 		};
 		BE88F1A52C6CC5FE006AAA84 /* Scenes */ = {
