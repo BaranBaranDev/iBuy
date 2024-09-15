@@ -11,7 +11,8 @@ struct ReuseID {
     static let categoryCell: String = "CategoryCell"
     static let productCell: String = "ProductCell"
     static let featureCell: String = "FeatureCell"
-    static let headerView: String = "HeaderView"
+    static let homeHeaderView: String = "HomeHeaderView"
     static let cartCell: String = "CartCell"
+    static let cartHeaderView: String = "CartHeaderView"
     
 }

@@ -10,15 +10,19 @@ import UIKit
 
 
 protocol CartDisplayLogic: AnyObject {
-   func display(viewModel: CartModels.FetchProducts.ViewModel)
+    func display(viewModel: CartModels.FetchProducts.ViewModel)
 }
 
 
 
 final class CartViewController: UIViewController{
-
+    
     // MARK: - Properties
     private lazy var products: [ProductDatabase] = []
+    
+    private var totalPrice: Double {
+        return Double(products.reduce(0) { $0 + $1.price })
+    }
     
     // MARK: - UI Elements
     
@@ -28,15 +32,15 @@ final class CartViewController: UIViewController{
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return collectionView
     }()
-
     
-
+    
+    
     //MARK: - Dependencies
-
+    
     private var interactor : CartBusinessLogic
     
     private let router : CartRoutingLogic
-
+    
     
     // MARK:  İnitialization
     
@@ -59,7 +63,7 @@ final class CartViewController: UIViewController{
         layout()
         fetchProduct()
     }
- 
+    
     
     // MARK: - Setup
     private func setup() {
@@ -68,6 +72,8 @@ final class CartViewController: UIViewController{
         cartCollectionView.delegate = self
         cartCollectionView.dataSource = self
         cartCollectionView.register(CartCell.self, forCellWithReuseIdentifier: ReuseID.cartCell)
+        cartCollectionView.register(CartHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "CartHeaderView")
+        
     }
     
     private func layout(){
@@ -93,9 +99,10 @@ extension CartViewController: CartDisplayLogic {
         }
     }
     
-
+    
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
 extension CartViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print(products.count)
@@ -113,8 +120,25 @@ extension CartViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: .screenWidth, height: .screenHeight / 3)
+        return .init(width: .screenWidth, height: .screenHeight / 3 )
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: .screenWidth, height: .screenHeight / 3 )
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionHeader {
+            guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CartHeaderView", for: indexPath) as? CartHeaderView else { return UICollectionReusableView() }
+            headerView.configure(totalAmount: totalPrice)
+            return headerView
+        }
+        
+        return UICollectionReusableView()
+    }
+    
+    
 }
 
 

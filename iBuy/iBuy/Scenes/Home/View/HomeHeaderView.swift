@@ -7,7 +7,7 @@
 
 import UIKit
 import SnapKit
-final class HeaderView: UICollectionReusableView {
+final class HomeHeaderView: UICollectionReusableView {
     
     // MARK: Properties
     public var headerText: String? {
@@ -41,13 +41,13 @@ final class HeaderView: UICollectionReusableView {
 }
 
 // MARK: - Setup
-private extension HeaderView {
+private extension HomeHeaderView {
     func setup() {
         addSubview(headerTitle)
     }
 }
 // MARK: - Layout
-private extension HeaderView {
+private extension HomeHeaderView {
     func layout() {
         headerTitle.snp.makeConstraints { make in
             make.centerY.equalToSuperview()

@@ -73,7 +73,7 @@ final class HomeViewController: UIViewController {
         homeCollectionView.register(FeatureCell.self, forCellWithReuseIdentifier: ReuseID.featureCell)
         homeCollectionView.register(CategoryCell.self, forCellWithReuseIdentifier: ReuseID.categoryCell)
         homeCollectionView.register(ProductCell.self, forCellWithReuseIdentifier: ReuseID.productCell)
-        homeCollectionView.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ReuseID.headerView)
+        homeCollectionView.register(HomeHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ReuseID.homeHeaderView)
         
         // Invalidate layout
         homeCollectionView.collectionViewLayout.invalidateLayout()
@@ -149,7 +149,7 @@ extension HomeViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let sectionType = SectionType(rawValue: indexPath.section) else { return UICollectionReusableView() }
-        guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ReuseID.headerView, for: indexPath) as? HeaderView else { return UICollectionReusableView()}
+        guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ReuseID.homeHeaderView, for: indexPath) as? HomeHeaderView else { return UICollectionReusableView()}
         
         headerView.headerText = sectionType.sectionTitle
         return headerView
