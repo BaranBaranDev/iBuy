@@ -5,7 +5,7 @@
 //  Created by Baran Baran on 28.08.2024.
 //
 
-import UIKit
+import Foundation
 import FirebaseFirestore
 
 // MARK: - HomeNetworkWorker Protocol
@@ -30,7 +30,7 @@ final class HomeWorker {
 
 extension HomeWorker: HomeNetworkWorker {
     func fetchFeatures(completion: @escaping (Result<[FeatureResponse], ServiceError>) -> Void) {
-        service.fetchData(collectionName: "features", completion: completion)
+        service.fetchData(collectionName: FirebaseConstants.features, completion: completion)
     }
     
     func fetchProducts(with categoryName: String, completion: @escaping (Result<[ProductResponse], ServiceError>) -> Void) {

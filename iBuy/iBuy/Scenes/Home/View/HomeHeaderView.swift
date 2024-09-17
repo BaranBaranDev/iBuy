@@ -19,13 +19,11 @@ final class HomeHeaderView: UICollectionReusableView {
     
     // MARK:  UI Elements
      private let headerTitle: UILabel = {
-         let lbl = UILabel()
-         lbl.textColor = .label
-         lbl.textAlignment = .left
-         lbl.adjustsFontForContentSizeCategory = true
-         lbl.font = UIFont.boldSystemFont(ofSize: 30)
-         lbl.adjustsFontSizeToFitWidth = true
-         return lbl
+         LabelFactory.build(
+            font: .italicSystemFont(ofSize: 30),
+            textAlignment: .left,
+            textColor: .label
+         )
      }()
     
     // MARK:  İnitialization
@@ -37,6 +35,11 @@ final class HomeHeaderView: UICollectionReusableView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        headerTitle.text = nil
     }
 }
 
@@ -55,4 +58,8 @@ private extension HomeHeaderView {
             make.trailing.equalToSuperview().inset(8)
         }
     }
+}
+
+#Preview {
+    HomeBuilder.build()
 }

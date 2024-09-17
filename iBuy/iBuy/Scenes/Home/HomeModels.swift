@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 enum HomeModels {
 
     // MARK: - Fetch Features Use Case

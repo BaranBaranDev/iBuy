@@ -10,8 +10,8 @@ import FirebaseFirestore
 
 // MARK: - HomeDisplayLogic Protocol
 protocol HomeDisplayLogic: AnyObject {
-    func display(viewModel: HomeModels.FetchFeatures.ViewModel)
-    func display(viewModel: HomeModels.FetchProducts.ViewModel)
+    func display(_ viewModel: HomeModels.FetchFeatures.ViewModel)
+    func display(_ viewModel: HomeModels.FetchProducts.ViewModel)
 }
 
 // MARK: - HomeViewController
@@ -80,13 +80,14 @@ final class HomeViewController: UIViewController {
         
     }
     private func fetchData(){
-        interactor.fetchFeatures(request: HomeModels.FetchFeatures.Request())
+        let request =  HomeModels.FetchFeatures.Request()
+        interactor.fetchFeatures(request)
     }
 }
 
 // MARK: - HomeViewController: HomeDisplayLogic
 extension HomeViewController: HomeDisplayLogic {
-    func display(viewModel: HomeModels.FetchFeatures.ViewModel) {
+    func display(_ viewModel: HomeModels.FetchFeatures.ViewModel) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.features = viewModel.features
@@ -94,7 +95,7 @@ extension HomeViewController: HomeDisplayLogic {
         }
     }
     
-    func display(viewModel: HomeModels.FetchProducts.ViewModel) {
+    func display(_ viewModel: HomeModels.FetchProducts.ViewModel) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.products = viewModel.products
@@ -166,7 +167,8 @@ extension HomeViewController: UICollectionViewDelegate {
             break
         case .category:
             let selectedCategoryName = categories[indexPath.item].name
-            interactor.fetchProducts(request: HomeModels.FetchProducts.Request(categoryName: selectedCategoryName))
+            let request = HomeModels.FetchProducts.Request(categoryName: selectedCategoryName)
+            interactor.fetchProducts(request)
         case .products:
             let selectedProduct = products[indexPath.item]
             interactor.selectedProduct = selectedProduct

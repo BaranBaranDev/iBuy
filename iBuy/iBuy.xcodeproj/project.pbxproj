@@ -36,7 +36,7 @@
 		BE4C7F072C7CE8B200DE88BD /* FirebaseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4C7F062C7CE8B200DE88BD /* FirebaseConstants.swift */; };
 		BE4C7F092C7CE90A00DE88BD /* ServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4C7F082C7CE90A00DE88BD /* ServiceError.swift */; };
 		BE5BE77D2C790CA100025994 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE5BE77C2C790CA100025994 /* GoogleService-Info.plist */; };
-		BE5BE7802C790E8800025994 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = BE5BE77F2C790E8800025994 /* FirebaseAuth */; };
+		BE5BE7802C790E8800025994 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = BE5BE77F2C790E8800025994 /* FirebaseAuth */; settings = {ATTRIBUTES = (Required, ); }; };
 		BE5BE7822C790E8800025994 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = BE5BE7812C790E8800025994 /* FirebaseAuthCombine-Community */; };
 		BE5BE7842C790E8800025994 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = BE5BE7832C790E8800025994 /* FirebaseDatabase */; };
 		BE5BE7862C790E8800025994 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = BE5BE7852C790E8800025994 /* FirebaseFirestore */; };
@@ -608,6 +608,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
@@ -622,6 +623,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9N2C3RSUH8;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iBuy/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -634,7 +636,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.iosdevbaran.e-commerceApp";
+				PRODUCT_BUNDLE_IDENTIFIER = com.iosdevbaran.iBuy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -650,6 +652,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9N2C3RSUH8;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iBuy/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -662,7 +665,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.iosdevbaran.e-commerceApp";
+				PRODUCT_BUNDLE_IDENTIFIER = com.iosdevbaran.iBuy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

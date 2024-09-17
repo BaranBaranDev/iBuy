@@ -11,4 +11,6 @@ import Foundation
 struct FirebaseConstants {
     static let collectionName = "iBuy"
     static let documentID = "P09zzkenN8uMcybcGcxH"
+    static let features = "features"
+    
 }

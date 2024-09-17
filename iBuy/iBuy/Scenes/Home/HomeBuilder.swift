@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 enum HomeBuilder {
     static func build() -> HomeViewController {
         let service = FirebaseService()

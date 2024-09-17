@@ -15,17 +15,17 @@ final class FeatureCell: UICollectionViewCell {
     // MARK: - UI Elements
     
     private lazy var backgroundImageView: UIImageView = {
-        return ImageFactory.build(contentMode: .scaleAspectFit)
+        ImageFactory.build(contentMode: .scaleAspectFit)
     }()
     
     private lazy var titleLabel: UILabel = {
-        return LabelFactory.build(
+        LabelFactory.build(
             font: UIFont.boldSystemFont(ofSize: 30)
         )
     }()
     
     private lazy var detailButton: UIButton = {
-        return ButtonFactory.build(
+        ButtonFactory.build(
             title: "Learn More",
             titleColor: .white,
             backgroundColor: .systemBlue,
@@ -35,7 +35,7 @@ final class FeatureCell: UICollectionViewCell {
     
     
     private lazy var buyButton: UIButton = {
-        return ButtonFactory.build(
+        ButtonFactory.build(
             title: "Buy",
             titleColor: .systemBlue,
             backgroundColor: .clear,
@@ -47,7 +47,7 @@ final class FeatureCell: UICollectionViewCell {
     
     
     private lazy var buttonStackView: UIStackView = {
-        return StackViewFactory.build(
+        StackViewFactory.build(
             views: [detailButton,buyButton],
             axis: .horizontal,
             distribution: .equalCentering,

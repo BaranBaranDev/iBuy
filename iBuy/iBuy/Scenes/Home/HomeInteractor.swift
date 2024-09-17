@@ -9,8 +9,8 @@ import Foundation
 
 // MARK: - HomeBusinessLogic
 protocol HomeBusinessLogic {
-    func fetchFeatures(request: HomeModels.FetchFeatures.Request)
-    func fetchProducts(request: HomeModels.FetchProducts.Request)
+    func fetchFeatures(_ request: HomeModels.FetchFeatures.Request)
+    func fetchProducts(_ request: HomeModels.FetchProducts.Request)
 }
 
 // MARK: - HomeDataStore
@@ -27,9 +27,9 @@ final class HomeInteractor: HomeDataStore {
  
     //MARK: Dependencies
     private let presenter: HomePresentationLogic
-    private let worker: HomeWorker
+    private let worker: HomeNetworkWorker
     
-    init(presenter: HomePresentationLogic, worker: HomeWorker) {
+    init(presenter: HomePresentationLogic, worker: HomeNetworkWorker) {
         self.presenter = presenter
         self.worker = worker
     }
@@ -39,26 +39,28 @@ final class HomeInteractor: HomeDataStore {
 
 // MARK: - HomeInteractor: HomeBusinessLogic
 extension HomeInteractor: HomeBusinessLogic {
-    func fetchFeatures(request: HomeModels.FetchFeatures.Request) {
+    func fetchFeatures(_ request: HomeModels.FetchFeatures.Request) {
         worker.fetchFeatures { [weak self] result in
             guard let self = self else { return }
             switch result {
     
             case .success(let features):
-                presenter.present(response: HomeModels.FetchFeatures.Response(features: features))
+                let response =  HomeModels.FetchFeatures.Response(features: features)
+                presenter.present(response)
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
     }
     
-    func fetchProducts(request: HomeModels.FetchProducts.Request) {
+    func fetchProducts(_ request: HomeModels.FetchProducts.Request) {
         worker.fetchProducts(with: request.categoryName) { [weak self] result in
             guard let self = self else { return }
             switch result {
                 
             case .success(let products):
-                presenter.present(response: HomeModels.FetchProducts.Response(products: products))
+                let response = HomeModels.FetchProducts.Response(products: products)
+                presenter.present(response)
             case .failure(let error):
                 print(error.localizedDescription)
             }

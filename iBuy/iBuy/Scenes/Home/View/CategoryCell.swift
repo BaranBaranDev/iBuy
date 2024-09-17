@@ -14,18 +14,18 @@ final class CategoryCell: UICollectionViewCell {
     // MARK: - UI Elements
 
     private let categoryImageView: UIImageView = {
-        return ImageFactory.build(
+         ImageFactory.build(
             contentMode: .scaleAspectFit,
             tintColor: .black
         )
     }()
 
     private let categoryLabel: UILabel = {
-        return LabelFactory.build()
+         LabelFactory.build()
     }()
 
     private lazy var categoryStackView: UIStackView = {
-        return StackViewFactory.build(
+         StackViewFactory.build(
             views: [categoryImageView,categoryLabel],
             axis: .vertical
         )
@@ -79,7 +79,6 @@ extension CategoryCell{
         categoryImageView.image = UIImage(systemName: category.iconName)
         categoryLabel.text = category.name
     }
-
 }
 
 #Preview {
