@@ -9,8 +9,8 @@
 import UIKit
 
 enum DetailModels {
-  // MARK: Use cases
-  
+    
+  // MARK: Save Product Use cases
   enum SaveProduct {
       struct Request {
           let productName: String

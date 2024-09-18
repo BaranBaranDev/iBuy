@@ -15,30 +15,32 @@ protocol ProductViewDelegate: AnyObject {
 // MARK: - ProductView
 final class ProductView: UIView {
     
-    
     // MARK:  Properties
     weak var delegate: ProductViewDelegate?
     
     // MARK: - UI Elements
     private lazy var productImageView: UIImageView = {
         ImageFactory.build(
-            imageName: "macbook",
             contentMode: .scaleAspectFit
         )
     }()
     
     private lazy var productNameLabel: UILabel = {
-        LabelFactory.build(text: "Test name")
+        LabelFactory.build(
+            font: .boldSystemFont(ofSize: 30),
+            textAlignment: .center
+        )
     }()
     
     private lazy var productPriceLabel: UILabel = {
-        LabelFactory.build(text: "Test price")
+        LabelFactory.build()
     }()
     
     private lazy var labelStackView: UIStackView = {
         StackViewFactory.build(
             views: [productNameLabel, productPriceLabel],
-            axis: .vertical
+            axis: .vertical,
+            spacing: 8
         )
     }()
     
@@ -47,7 +49,8 @@ final class ProductView: UIView {
             title: "Add to Cart",
             titleColor: .white,
             backgroundColor: .systemBlue,
-            cornerRadius: 20
+            cornerRadius: 20,
+            font: .boldSystemFont(ofSize: 20)
         )
         button.addTarget(self, action: #selector(cartButtonTapped), for: .touchUpInside)
         return button
@@ -69,9 +72,7 @@ final class ProductView: UIView {
 private extension ProductView {
     func setup() {
         backgroundColor = .systemBackground
-        addSubview(productImageView)
-        addSubview(labelStackView)
-        addSubview(cartButton)
+        addSubviewsFromExt(productImageView,labelStackView,cartButton)
     }
 }
 
@@ -94,8 +95,8 @@ private extension ProductView {
         cartButton.snp.makeConstraints { make in
             make.top.equalTo(labelStackView.snp.bottomMargin).offset(16)
             make.centerX.equalToSuperview()
-            make.height.equalTo(65)
-            make.width.equalTo(150)
+            make.height.equalTo(50)
+            make.width.equalTo(CGFloat.screenWidth * 0.80)
         }
     }
 }
@@ -114,11 +115,37 @@ extension ProductView {
 
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            self.productNameLabel.text = product.name
-            self.productPriceLabel.text = String(product.price)
+            self.configureLabel(for: product)
             if let url = URL(string: product.url) {
                 self.productImageView.sd_setImage(with: url)
             }
         }
     }
+    
+    private func configureLabel(for product: ProductResponse) {
+        productNameLabel.text = product.name
+        productPriceLabel.attributedText = formatPriceText(for: Double(product.price))
+    }
+
+    private func formatPriceText(for price: Double) -> NSAttributedString {
+        let priceText = "$\(price)"
+        let attributedText = NSMutableAttributedString(
+            string: priceText,
+            attributes: [
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20)
+            ]
+        )
+        
+        attributedText.addAttributes([
+            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 24),
+        ], range: NSMakeRange(0, 1))
+        
+        return attributedText
+    }
+
+}
+
+
+#Preview {
+   MainVC()
 }

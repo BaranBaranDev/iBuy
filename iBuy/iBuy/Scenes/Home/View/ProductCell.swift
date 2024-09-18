@@ -59,8 +59,8 @@ private extension ProductCell {
     }
 }
 
+  // MARK: - Layout
 private extension ProductCell {
-    
     func layout() {
         productStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(8)

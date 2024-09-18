@@ -12,9 +12,7 @@ protocol DetailDataWorker {
     func saveProduct(name: String, price: Int, url: String)
 }
 
-
 // MARK: - DetailWorker
-
 final class DetailWorker {
     //MARK: Dependencies
     private let service: CoreDataService

@@ -17,7 +17,7 @@ protocol HomeDisplayLogic: AnyObject {
 // MARK: - HomeViewController
 final class HomeViewController: UIViewController {
     
-    // MARK: - Properties
+    // MARK:  Properties
     private lazy var features: [FeatureResponse] = []
     private lazy var categories = Category.allCategories
     private lazy var products : [ProductResponse] = []

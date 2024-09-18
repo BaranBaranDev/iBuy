@@ -8,20 +8,20 @@
 
 import UIKit
 
+// MARK: - DetailPresentationLogic
 protocol DetailPresentationLogic {
     func present(response: DetailModels.SaveProduct.Response)
 }
 
 
-
+// MARK: - DetailPresenter
 final class DetailPresenter {
   weak var controller: DetailDisplayLogic?
   
   
 }
 
-
-
+// MARK: - DetailPresenter: DetailPresentationLogic
 extension DetailPresenter: DetailPresentationLogic {
     func present(response: DetailModels.SaveProduct.Response) {
         let viewModel = DetailModels.SaveProduct.ViewModel(successMessage: "Saved Database")

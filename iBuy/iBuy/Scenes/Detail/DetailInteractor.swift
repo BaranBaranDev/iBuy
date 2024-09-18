@@ -27,7 +27,7 @@ final class DetailInteractor {
     
 }
 
-
+// MARK: - DetailInteractor: DetailBusinessLogic
 extension DetailInteractor: DetailBusinessLogic {
     func saveProduct(name: String, price: Int, url: String) {
         let request = DetailModels.SaveProduct.Request(productName: name, productPrice: price, productUrl: url)
