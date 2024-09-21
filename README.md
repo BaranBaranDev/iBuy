@@ -35,4 +35,4 @@
 To clone this repository, run the following command in your terminal:
 
 ```bash
-git clone https://github.com/BaranBaranDev/iBuy.git
+https://github.com/BaranBaranDev/iBuy.git
