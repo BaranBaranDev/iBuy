@@ -1,22 +1,31 @@
 # iBuy - E-Commerce App
 
-iBuy is a modern e-commerce app built with a focus on code quality, performance, and scalable architecture. The app interface is 100% programmatically developed using UIKit, leveraging advanced UICollectionView layouts for a smooth and responsive user experience.
+**iBuy** is a modern e-commerce application designed with a strong emphasis on code quality, performance, and scalable architecture. The app's interface is developed entirely programmatically using UIKit, utilizing advanced UICollectionView layouts to provide a smooth and responsive user experience.
 
-# Features
+## Features
 
-Programmatic UIKit: The entire interface is built without Storyboards or XIBs, ensuring full control over the UI and flexibility in layout.
-Compositional Layout: Uses UICollectionView with modern UICollectionViewCompositionalLayout for a flexible and efficient UI, supporting dynamic and complex layouts.
-Clean Swift VIP Architecture: Implements the Clean Architecture with VIP (View, Interactor, Presenter) for highly modular, testable, and maintainable code.
-CoreData Integration: Generic data management using CoreData for storing, retrieving, and deleting user data.
-Firebase Admin Panel: Firebase is integrated for handling user data and serving as the backend for real-time database operations.
-SDWebImage with Caching: Images are loaded and cached efficiently using SDWebImage, including a custom cache size limit (50MB) to optimize performance.
-Notification Center & Protocols: Extensive use of NotificationCenter and protocols ensures decoupled communication across app components.
-Factory Pattern: Utilized for creating common UI components such as labels, buttons, and more to promote code reuse and consistency.
-Dependency Injection: Applied across the app to decouple class dependencies and improve testability.
-Core Technologies
+- **Programmatic UIKit**: The entire interface is built without Storyboards or XIBs, ensuring complete control over the UI and flexibility in layout design.
+  
+- **Compositional Layout**: Implements `UICollectionViewCompositionalLayout` for a flexible and efficient UI, supporting dynamic and complex layouts.
+  
+- **Clean Swift VIP Architecture**: Follows the Clean Architecture principles with VIP (View, Interactor, Presenter) to ensure a highly modular, testable, and maintainable codebase.
+  
+- **Core Data Integration**: Provides generic data management using Core Data for storing, retrieving, and deleting user data.
+  
+- **Firebase Admin Panel**: Integrates Firebase to handle user data and serve as the backend for real-time database operations.
+  
+- **SDWebImage with Caching**: Efficiently loads and caches images using SDWebImage, featuring a custom cache size limit of **50MB** to optimize performance.
+  
+- **Notification Center & Protocols**: Utilizes `NotificationCenter` and protocols extensively to ensure decoupled communication across app components.
+  
+- **Factory Pattern**: Implements the Factory Pattern for creating common UI components such as labels and buttons, promoting code reuse and consistency.
+  
+- **Dependency Injection**: Applies dependency injection throughout the app to decouple class dependencies and enhance testability.
 
-UIKit: For custom, programmatic UI.
-Clean Swift Architecture (VIP): Ensuring separation of concerns and scalable code.
-CoreData: For persistent data storage.
-Firebase: Backend for real-time data and authentication.
-SDWebImage: For image loading and caching with a custom cache size of 50MB.
+## Core Technologies
+
+- **UIKit**: For custom, programmatic UI development.
+- **Clean Swift Architecture (VIP)**: Ensures separation of concerns and promotes scalable code.
+- **Core Data**: For persistent data storage solutions.
+- **Firebase**: Serves as the backend for real-time data management and authentication.
+- **SDWebImage**: Facilitates image loading and caching with a custom cache size of **50MB**.
