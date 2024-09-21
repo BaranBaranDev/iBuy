@@ -10,7 +10,7 @@ import UIKit
 
 // MARK: - DetailPresentationLogic
 protocol DetailPresentationLogic {
-    func present(response: DetailModels.SaveProduct.Response)
+    func presentSaveProduct(response: DetailModels.SaveProduct.Response)
 }
 
 
@@ -18,12 +18,11 @@ protocol DetailPresentationLogic {
 final class DetailPresenter {
   weak var controller: DetailDisplayLogic?
   
-  
 }
 
 // MARK: - DetailPresenter: DetailPresentationLogic
 extension DetailPresenter: DetailPresentationLogic {
-    func present(response: DetailModels.SaveProduct.Response) {
+    func presentSaveProduct(response: DetailModels.SaveProduct.Response) {
         let viewModel = DetailModels.SaveProduct.ViewModel(successMessage: "Saved Database")
         controller?.display(viewModel: viewModel)
     }

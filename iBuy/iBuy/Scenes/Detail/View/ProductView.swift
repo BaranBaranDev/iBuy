@@ -27,7 +27,7 @@ final class ProductView: UIView {
     
     private lazy var productNameLabel: UILabel = {
         LabelFactory.build(
-            font: .boldSystemFont(ofSize: 30),
+            font: .customFont(weight: .bold, size: 30),
             textAlignment: .center
         )
     }()
@@ -50,7 +50,7 @@ final class ProductView: UIView {
             titleColor: .white,
             backgroundColor: .systemBlue,
             cornerRadius: 20,
-            font: .boldSystemFont(ofSize: 20)
+            font: .customFont(weight: .bold, size: 20)
         )
         button.addTarget(self, action: #selector(cartButtonTapped), for: .touchUpInside)
         return button
@@ -142,10 +142,4 @@ extension ProductView {
         
         return attributedText
     }
-
-}
-
-
-#Preview {
-   MainVC()
 }

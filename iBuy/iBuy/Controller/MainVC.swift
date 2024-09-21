@@ -15,7 +15,6 @@ final class MainVC: UITabBarController {
 }
 
 // MARK: - Helpers
-
 private extension MainVC {
     func setup() {
         
@@ -68,4 +67,8 @@ private extension MainVC {
         UINavigationBar.appearance().compactAppearance = appearance
         UINavigationBar.appearance().compactScrollEdgeAppearance = appearance
     }
+}
+// MARK: - Preview
+#Preview {
+   MainVC()
 }

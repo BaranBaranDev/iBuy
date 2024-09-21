@@ -46,7 +46,7 @@ extension HomeInteractor: HomeBusinessLogic {
     
             case .success(let features):
                 let response =  HomeModels.FetchFeatures.Response(features: features)
-                presenter.present(response)
+                presenter.presentFetchFeatures(response)
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -60,7 +60,7 @@ extension HomeInteractor: HomeBusinessLogic {
                 
             case .success(let products):
                 let response = HomeModels.FetchProducts.Response(products: products)
-                presenter.present(response)
+                presenter.presentFetchProducts(response)
             case .failure(let error):
                 print(error.localizedDescription)
             }

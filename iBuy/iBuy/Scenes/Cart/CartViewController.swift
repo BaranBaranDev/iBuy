@@ -42,15 +42,24 @@ final class CartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        layout()
         fetchProducts()
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        if (self.isViewLoaded) && (self.view.window == nil) {
+            self.view = nil
+        }
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(
             forName: Notification.Name(ReuseID.notificationName),
-            object: nil, queue: nil) { [weak self] notification in
+            object: nil,
+            queue: nil)
+        { [weak self] notification in
                 guard let self = self else { return }
                 self.fetchProducts()
             }
@@ -65,8 +74,6 @@ final class CartViewController: UIViewController {
         cartCollectionView.dataSource = self
         cartCollectionView.register(CartCell.self, forCellWithReuseIdentifier: ReuseID.cartCell)
         cartCollectionView.register(CartHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ReuseID.cartHeaderView)
-        
-        layout()
     }
     
     // MARK: - Layout
@@ -76,7 +83,7 @@ final class CartViewController: UIViewController {
         }
     }
     
-    // MARK: - Fetch Products
+    // MARK: - Data Fetching
     private func fetchProducts() {
         let request = CartModels.FetchProducts.Request()
         interactor.fetchProducts(request)
@@ -145,6 +152,7 @@ extension CartViewController: UICollectionViewDelegate {
         cell.addGestureRecognizer(swipeGesture)
     }
     
+    // MARK:  Swipe To Delete
     @objc private func handleSwipeToDelete(_ gesture: UISwipeGestureRecognizer) {
         guard let cell = gesture.view as? UICollectionViewCell,
               let indexPath = cartCollectionView.indexPath(for: cell) else { return }
@@ -162,6 +170,7 @@ extension CartViewController: UICollectionViewDelegate {
         updateTotalPrice()
     }
     
+    // MARK:  Total Price Update
     private func updateTotalPrice() {
         let newTotalPrice = calculateTotalPrice()
         if let headerView = cartCollectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: IndexPath(item: 0, section: 0)) as? CartHeaderView {
@@ -169,6 +178,7 @@ extension CartViewController: UICollectionViewDelegate {
         }
     }
     
+    // MARK:  Calculate Total Price
     private func calculateTotalPrice() -> Double {
         return Double(products.reduce(0) { $0 + $1.price })
     }

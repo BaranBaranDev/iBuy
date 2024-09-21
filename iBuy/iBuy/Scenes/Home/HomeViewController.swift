@@ -10,8 +10,8 @@ import FirebaseFirestore
 
 // MARK: - HomeDisplayLogic Protocol
 protocol HomeDisplayLogic: AnyObject {
-    func display(_ viewModel: HomeModels.FetchFeatures.ViewModel)
-    func display(_ viewModel: HomeModels.FetchProducts.ViewModel)
+    func displayFetchFeatures(_ viewModel: HomeModels.FetchFeatures.ViewModel)
+    func displayFetchProducts(_ viewModel: HomeModels.FetchProducts.ViewModel)
 }
 
 // MARK: - HomeViewController
@@ -57,6 +57,13 @@ final class HomeViewController: UIViewController {
         
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        if (self.isViewLoaded) && (self.view.window == nil) {
+            self.view = nil
+        }
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         homeCollectionView.frame = view.bounds
@@ -79,6 +86,7 @@ final class HomeViewController: UIViewController {
         homeCollectionView.collectionViewLayout.invalidateLayout()
         
     }
+    // MARK: - Data Fetching
     private func fetchData(){
         let request =  HomeModels.FetchFeatures.Request()
         interactor.fetchFeatures(request)
@@ -87,7 +95,7 @@ final class HomeViewController: UIViewController {
 
 // MARK: - HomeViewController: HomeDisplayLogic
 extension HomeViewController: HomeDisplayLogic {
-    func display(_ viewModel: HomeModels.FetchFeatures.ViewModel) {
+    func displayFetchFeatures(_ viewModel: HomeModels.FetchFeatures.ViewModel) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.features = viewModel.features
@@ -95,7 +103,7 @@ extension HomeViewController: HomeDisplayLogic {
         }
     }
     
-    func display(_ viewModel: HomeModels.FetchProducts.ViewModel) {
+    func displayFetchProducts(_ viewModel: HomeModels.FetchProducts.ViewModel) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.products = viewModel.products
@@ -131,7 +139,7 @@ extension HomeViewController: UICollectionViewDataSource {
         switch sectionType {
         case .featured:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseID.featureCell, for: indexPath) as? FeatureCell else { return UICollectionViewCell() }
-            let model = features[indexPath.item]
+            let model = features[safe: indexPath.item]
             cell.configure(with: model)
             return cell
             
@@ -142,7 +150,7 @@ extension HomeViewController: UICollectionViewDataSource {
             return cell
         case .products:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseID.productCell, for: indexPath) as? ProductCell else { return UICollectionViewCell() }
-            let productItem = products[indexPath.item]
+            let productItem = products[safe: indexPath.item]
             cell.configure(with: productItem)
             return cell
         }
@@ -175,9 +183,4 @@ extension HomeViewController: UICollectionViewDelegate {
             router.routeDetail()
         }
     }
-}
-
-// MARK: - Preview
-#Preview {
-    HomeBuilder.build()
 }

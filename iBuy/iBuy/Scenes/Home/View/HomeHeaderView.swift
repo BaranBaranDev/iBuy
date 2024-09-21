@@ -20,7 +20,7 @@ final class HomeHeaderView: UICollectionReusableView {
     // MARK:  UI Elements
      private let headerTitle: UILabel = {
          LabelFactory.build(
-            font: .italicSystemFont(ofSize: 30),
+            font: .customFont(weight: .demiBold, size: 25),
             textAlignment: .left,
             textColor: .label
          )
@@ -58,8 +58,4 @@ private extension HomeHeaderView {
             make.trailing.equalToSuperview().inset(8)
         }
     }
-}
-
-#Preview {
-    HomeBuilder.build()
 }

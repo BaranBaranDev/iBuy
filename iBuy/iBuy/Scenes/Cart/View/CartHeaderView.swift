@@ -12,7 +12,7 @@ final class CartHeaderView: UICollectionReusableView {
     // MARK: - UI Elements
     private lazy var totalAmountLabel: UILabel = {
         LabelFactory.build(
-            font: .boldSystemFont(ofSize: 24),
+            font: .customFont(weight: .bold, size: 25),
             textAlignment: .center
         )
     }()
@@ -47,6 +47,6 @@ private extension CartHeaderView {
 // MARK: - Configure
 extension CartHeaderView {
     public func configure(totalAmount: Double) {
-        totalAmountLabel.text = "Toplam: $\(totalAmount)"
+        totalAmountLabel.text = "Your cart total: $\(totalAmount)"
     }
 }

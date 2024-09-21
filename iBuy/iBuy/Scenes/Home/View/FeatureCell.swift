@@ -20,7 +20,7 @@ final class FeatureCell: UICollectionViewCell {
     
     private lazy var titleLabel: UILabel = {
         LabelFactory.build(
-            font: UIFont.boldSystemFont(ofSize: 30)
+            font: .customFont(weight: .bold, size: 30)
         )
     }()
     
@@ -135,8 +135,4 @@ extension FeatureCell {
         titleLabel.text = model.name
     }
     
-}
-
-#Preview {
-    HomeBuilder.build()
 }

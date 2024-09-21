@@ -10,8 +10,8 @@ import UIKit
 
 // MARK: - HomePresentationLogic
 protocol HomePresentationLogic {
-    func present(_ response: HomeModels.FetchFeatures.Response)
-    func present(_ response: HomeModels.FetchProducts.Response)
+    func presentFetchFeatures(_ response: HomeModels.FetchFeatures.Response)
+    func presentFetchProducts(_ response: HomeModels.FetchProducts.Response)
 }
 
 // MARK: - HomePresenter
@@ -22,16 +22,15 @@ final class HomePresenter {
     
 }
 
-
 // MARK: - HomePresenter: HomePresentationLogic
 extension HomePresenter: HomePresentationLogic {
-    func present(_ response: HomeModels.FetchFeatures.Response) {
+    func presentFetchFeatures(_ response: HomeModels.FetchFeatures.Response) {
         let viewModel = HomeModels.FetchFeatures.ViewModel(features: response.features)
-        controller?.display(viewModel)
+        controller?.displayFetchFeatures(viewModel)
     }
     
-    func present(_ response: HomeModels.FetchProducts.Response) {
+    func presentFetchProducts(_ response: HomeModels.FetchProducts.Response) {
         let viewModel = HomeModels.FetchProducts.ViewModel(products: response.products)
-        controller?.display(viewModel)
+        controller?.displayFetchProducts(viewModel)
     }
 }

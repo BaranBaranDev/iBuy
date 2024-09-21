@@ -35,9 +35,5 @@ extension HomeRouter: HomeRoutingLogic {
         
         let vc = DetailBuilder.build(selectedProduct: selectedProduct)
         controller?.navigationController?.pushViewController(vc, animated: true)
-        
-        
     }
-    
-    
 }

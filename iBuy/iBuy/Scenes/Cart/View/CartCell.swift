@@ -45,6 +45,13 @@ final class CartCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError()
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        productImageView.image = nil
+        productNameLabel.text = nil
+        productPriceLabel.text = nil
+    }
 }
 // MARK: - Setup
 private extension CartCell {

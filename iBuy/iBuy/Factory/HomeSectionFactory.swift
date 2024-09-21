@@ -74,8 +74,3 @@ private extension HomeSectionFactory {
         )
     }
 }
-
-
-#Preview {
-    HomeBuilder.build()
-}

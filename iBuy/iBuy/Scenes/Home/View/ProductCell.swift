@@ -99,8 +99,3 @@ extension ProductCell {
         productPrice.attributedText = attributedText
     }
 }
-
-#Preview {
-    HomeBuilder.build()
-}
-

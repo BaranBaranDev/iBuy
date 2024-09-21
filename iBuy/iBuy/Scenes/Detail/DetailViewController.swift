@@ -57,6 +57,12 @@ final class DetailViewController: UIViewController{
         setup()
     }
  
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        if (self.isViewLoaded) && (self.view.window == nil) {
+            self.view = nil
+        }
+    }
     
     // MARK: - Setup
     private func setup() {
@@ -80,10 +86,4 @@ extension DetailViewController: DetailDisplayLogic {
     func display(viewModel: DetailModels.SaveProduct.ViewModel) {
         print(viewModel.successMessage)
     }
-}
-
-
-
-#Preview {
-    MainVC()
 }

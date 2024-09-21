@@ -80,7 +80,3 @@ extension CategoryCell{
         categoryLabel.text = category.name
     }
 }
-
-#Preview {
-    HomeBuilder.build()
-}

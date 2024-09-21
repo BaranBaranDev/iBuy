@@ -24,7 +24,6 @@ final class DetailInteractor {
         self.presenter = presenter
         self.worker = worker
     }
-    
 }
 
 // MARK: - DetailInteractor: DetailBusinessLogic
@@ -34,7 +33,7 @@ extension DetailInteractor: DetailBusinessLogic {
         worker.saveProduct(name: request.productName , price: request.productPrice, url: request.productUrl)
         
         let response = DetailModels.SaveProduct.Response(success: true)
-        presenter.present(response: response)
+        presenter.presentSaveProduct(response: response)
     }
     
     
