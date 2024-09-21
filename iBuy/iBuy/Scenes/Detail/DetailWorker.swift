@@ -30,7 +30,9 @@ extension DetailWorker: DetailDataWorker {
         product.name = name
         product.price = Int64(price)
         product.url = url
-        
+    
         service.saveContext()
+        
+        NotificationCenter.default.post(name: NSNotification.Name(ReuseID.notificationName), object: nil)  
     }
 }

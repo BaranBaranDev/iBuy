@@ -4,28 +4,22 @@
 //
 //  Created by Baran Baran on 14.09.2024.
 
-
-
 import UIKit
 
-
+// MARK: - CartDisplayLogic Protocol
 protocol CartDisplayLogic: AnyObject {
-    func display(viewModel: CartModels.FetchProducts.ViewModel)
+    func displayFetchedProducts(_ viewModel: CartModels.FetchProducts.ViewModel)
+    func displayDeleteProductResult(_ viewModel: CartModels.DeleteProduct.ViewModel)
 }
 
-
-
-final class CartViewController: UIViewController{
+// MARK: - CartViewController
+final class CartViewController: UIViewController {
     
     // MARK: - Properties
     private lazy var products: [ProductDatabase] = []
-    
-    private var totalPrice: Double {
-        return Double(products.reduce(0) { $0 + $1.price })
-    }
+    private var interactor: CartBusinessLogic
     
     // MARK: - UI Elements
-    
     private lazy var cartCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -33,37 +27,35 @@ final class CartViewController: UIViewController{
         return collectionView
     }()
     
-    
-    
-    //MARK: - Dependencies
-    
-    private var interactor : CartBusinessLogic
-    
-    private let router : CartRoutingLogic
-    
-    
-    // MARK:  İnitialization
-    
-    init(interactor: CartBusinessLogic, router: CartRoutingLogic) {
+    // MARK: - Initialization
+    init(interactor: CartBusinessLogic) {
         self.interactor = interactor
-        self.router = router
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        assertionFailure("init(coder:) has not been implemented")
+        return nil
     }
     
-    
     // MARK: - LifeCycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        layout()
-        fetchProduct()
+        fetchProducts()
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(
+            forName: Notification.Name(ReuseID.notificationName),
+            object: nil, queue: nil) { [weak self] notification in
+                guard let self = self else { return }
+                self.fetchProducts()
+            }
+    }
+
     
     // MARK: - Setup
     private func setup() {
@@ -72,76 +64,112 @@ final class CartViewController: UIViewController{
         cartCollectionView.delegate = self
         cartCollectionView.dataSource = self
         cartCollectionView.register(CartCell.self, forCellWithReuseIdentifier: ReuseID.cartCell)
-        cartCollectionView.register(CartHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "CartHeaderView")
+        cartCollectionView.register(CartHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ReuseID.cartHeaderView)
         
+        layout()
     }
     
-    private func layout(){
+    // MARK: - Layout
+    private func layout() {
         cartCollectionView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
-    private func fetchProduct(){
-        interactor.fetchProducts(request: CartModels.FetchProducts.Request())
+    // MARK: - Fetch Products
+    private func fetchProducts() {
+        let request = CartModels.FetchProducts.Request()
+        interactor.fetchProducts(request)
     }
 }
 
-
 // MARK: - CartDisplayLogic
-
 extension CartViewController: CartDisplayLogic {
-    func display(viewModel: CartModels.FetchProducts.ViewModel) {
+    func displayFetchedProducts(_ viewModel: CartModels.FetchProducts.ViewModel) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.products = viewModel.products
-            cartCollectionView.reloadData()
+            self.cartCollectionView.reloadData()
         }
     }
     
-    
+    func displayDeleteProductResult(_ viewModel: CartModels.DeleteProduct.ViewModel) {
+        if viewModel.message.contains("successfully") {
+            fetchProducts()
+        }
+    }
 }
 
-// MARK: - UICollectionViewDelegateFlowLayout
-extension CartViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+// MARK: - UICollectionViewDataSource
+extension CartViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(products.count)
         return products.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseID.cartCell, for: indexPath) as? CartCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseID.cartCell, for: indexPath) as? CartCell else {
+            return UICollectionViewCell()
+        }
+        
         let product = products[indexPath.item]
-        print(product)
-        cell.configure(product)
-        
+        cell.configure(with: product)
         return cell
-        
     }
-    
+}
+
+// MARK: - UICollectionViewDelegateFlowLayout
+extension CartViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: .screenWidth, height: .screenHeight / 3 )
+        return CGSize(width: .screenWidth, height: .screenHeight / 3)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: .screenWidth, height: .screenHeight / 3 )
-        
+        return CGSize(width: .screenWidth, height: .screenHeight / 3)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if kind == UICollectionView.elementKindSectionHeader {
-            guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CartHeaderView", for: indexPath) as? CartHeaderView else { return UICollectionReusableView() }
-            headerView.configure(totalAmount: totalPrice)
+        if kind == UICollectionView.elementKindSectionHeader,
+           let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ReuseID.cartHeaderView, for: indexPath) as? CartHeaderView {
+            headerView.configure(totalAmount: calculateTotalPrice())
             return headerView
         }
-        
         return UICollectionReusableView()
     }
-    
-    
 }
 
-
-#Preview {
-    MainVC()
+// MARK: - UICollectionViewDelegate
+extension CartViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeToDelete(_:)))
+        swipeGesture.direction = .left
+        cell.addGestureRecognizer(swipeGesture)
+    }
+    
+    @objc private func handleSwipeToDelete(_ gesture: UISwipeGestureRecognizer) {
+        guard let cell = gesture.view as? UICollectionViewCell,
+              let indexPath = cartCollectionView.indexPath(for: cell) else { return }
+        
+        UIView.animate(withDuration: 0.3) {
+            cell.backgroundColor = .clear
+        }
+        
+        let productToDelete = products[indexPath.item]
+        interactor.deleteProduct(CartModels.DeleteProduct.Request(product: productToDelete))
+        
+        products.remove(at: indexPath.item)
+        cartCollectionView.deleteItems(at: [indexPath])
+        
+        updateTotalPrice()
+    }
+    
+    private func updateTotalPrice() {
+        let newTotalPrice = calculateTotalPrice()
+        if let headerView = cartCollectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: IndexPath(item: 0, section: 0)) as? CartHeaderView {
+            headerView.configure(totalAmount: newTotalPrice)
+        }
+    }
+    
+    private func calculateTotalPrice() -> Double {
+        return Double(products.reduce(0) { $0 + $1.price })
+    }
 }

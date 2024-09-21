@@ -49,7 +49,7 @@ final class CartCell: UICollectionViewCell {
 // MARK: - Setup
 private extension CartCell {
     func setup(){
-        contentView.backgroundColor = .systemBackground
+        backgroundColor = .systemBackground
         addSubview(productImageView)
         addSubview(labelStackView)
     }
@@ -72,7 +72,7 @@ private extension CartCell {
 }
 // MARK: - Configure
 extension CartCell {
-    public func configure(_ product: ProductDatabase){
+    public func configure(with product: ProductDatabase){
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             productNameLabel.text = product.name
@@ -87,9 +87,4 @@ extension CartCell {
             productImageView.sd_setImage(with: URL(string: product.url ?? ""))
         }
     }
-}
-
-
-#Preview {
-    CartBuilder.build()
 }

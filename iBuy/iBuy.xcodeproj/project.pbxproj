@@ -23,7 +23,6 @@
 		BE15E2692C959FBB0024DF47 /* iBuyDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BE15E2672C959FBB0024DF47 /* iBuyDataModel.xcdatamodeld */; };
 		BE15E2712C95C03A0024DF47 /* CartPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE15E26A2C95C03A0024DF47 /* CartPresenter.swift */; };
 		BE15E2722C95C03A0024DF47 /* CartWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE15E26B2C95C03A0024DF47 /* CartWorker.swift */; };
-		BE15E2732C95C03A0024DF47 /* CartRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE15E26C2C95C03A0024DF47 /* CartRouter.swift */; };
 		BE15E2742C95C03A0024DF47 /* CartModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE15E26D2C95C03A0024DF47 /* CartModels.swift */; };
 		BE15E2752C95C03A0024DF47 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE15E26E2C95C03A0024DF47 /* CartViewController.swift */; };
 		BE15E2762C95C03A0024DF47 /* CartBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE15E26F2C95C03A0024DF47 /* CartBuilder.swift */; };
@@ -84,7 +83,6 @@
 		BE15E2682C959FBB0024DF47 /* iBuyDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iBuyDataModel.xcdatamodel; sourceTree = "<group>"; };
 		BE15E26A2C95C03A0024DF47 /* CartPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartPresenter.swift; sourceTree = "<group>"; };
 		BE15E26B2C95C03A0024DF47 /* CartWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartWorker.swift; sourceTree = "<group>"; };
-		BE15E26C2C95C03A0024DF47 /* CartRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartRouter.swift; sourceTree = "<group>"; };
 		BE15E26D2C95C03A0024DF47 /* CartModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartModels.swift; sourceTree = "<group>"; };
 		BE15E26E2C95C03A0024DF47 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		BE15E26F2C95C03A0024DF47 /* CartBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartBuilder.swift; sourceTree = "<group>"; };
@@ -306,7 +304,6 @@
 				BE15E26B2C95C03A0024DF47 /* CartWorker.swift */,
 				BE15E2702C95C03A0024DF47 /* CartInteractor.swift */,
 				BE15E26A2C95C03A0024DF47 /* CartPresenter.swift */,
-				BE15E26C2C95C03A0024DF47 /* CartRouter.swift */,
 			);
 			path = Cart;
 			sourceTree = "<group>";
@@ -458,7 +455,6 @@
 				BE15E2762C95C03A0024DF47 /* CartBuilder.swift in Sources */,
 				BE24F7052C74BB260049D440 /* ProductCell.swift in Sources */,
 				BE0B29842C737FEE00A13C83 /* CGFloat+Ext.swift in Sources */,
-				BE15E2732C95C03A0024DF47 /* CartRouter.swift in Sources */,
 				BE15E2692C959FBB0024DF47 /* iBuyDataModel.xcdatamodeld in Sources */,
 				BEBA2FAD2C875F39007D2DB0 /* DetailInteractor.swift in Sources */,
 				BE15E2772C95C03A0024DF47 /* CartInteractor.swift in Sources */,

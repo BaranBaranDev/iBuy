@@ -10,7 +10,8 @@ import CoreData
 
 // MARK: - CartDataWorker Protocol
 protocol CartDataWorker {
-    
+    func fetchProducts(completion: @escaping (Result <[ProductDatabase], Error>) -> Void)
+    func deleteProduct(_ product: ProductDatabase, completion: @escaping (Result<Void, Error>) -> Void)
 }
 
 // MARK: - CartWorker
@@ -24,7 +25,7 @@ final class CartWorker {
     }
 }
 
-
+// MARK: - CartWorker: CartDataWorker
 extension CartWorker: CartDataWorker {
     func fetchProducts(completion: @escaping (Result <[ProductDatabase], Error>) -> Void) {
         let request: NSFetchRequest<ProductDatabase> = ProductDatabase.fetchRequest()
@@ -37,5 +38,14 @@ extension CartWorker: CartDataWorker {
             completion(.failure(error))
         }
     }
-
+    
+    func deleteProduct(_ product: ProductDatabase, completion: @escaping (Result<Void, Error>) -> Void) {
+          service.context.delete(product)
+          do {
+              try service.context.save()
+              completion(.success(()))
+          } catch let error {
+              completion(.failure(error))
+          }
+      }
 }

@@ -14,5 +14,6 @@ struct ReuseID {
     static let homeHeaderView: String = "HomeHeaderView"
     static let cartCell: String = "CartCell"
     static let cartHeaderView: String = "CartHeaderView"
+    static let notificationName: String = "CartData"
     
 }

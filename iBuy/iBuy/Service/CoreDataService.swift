@@ -15,6 +15,7 @@ import CoreData
 protocol CoreDataServiceProtocol {
     func saveObject<T: NSManagedObject>(_ object: T)       // İsimlendirmenin daha anlamlı olması için save -> saveObject
     func fetchObjects<T: NSManagedObject>(_ objectType: T.Type) -> [T]   // fetch -> fetchObjects
+    func deleteObject<T: NSManagedObject>(_ object: T)
 }
 
 // MARK: - CoreDataService Class
@@ -77,5 +78,11 @@ extension CoreDataService: CoreDataServiceProtocol {
             let nserror = error as NSError
             fatalError("Çözülemeyen hata: \(nserror), \(nserror.userInfo)")
         }
+    }
+    
+    // silme
+    func deleteObject<T: NSManagedObject>(_ object: T) {
+        context.delete(object) // Nesneyi context'ten sil
+        saveContext() // Silme işlemini kalıcı hale getir
     }
 }

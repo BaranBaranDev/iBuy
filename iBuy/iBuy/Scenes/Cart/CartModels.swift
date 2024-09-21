@@ -8,10 +8,10 @@
 // iBuy
 // Created by Baran Baran on 14.09.2024.
 
-import UIKit
+import Foundation
 
 enum CartModels {
-    // MARK: Use cases
+    // MARK: Fetch Products Use cases
     enum FetchProducts {
         struct Request {}
 
@@ -23,6 +23,20 @@ enum CartModels {
         struct ViewModel {
             let products: [ProductDatabase]
             let errorMessage: String?
+        }
+    }
+    
+    // MARK: Delete Product Use cases
+    enum DeleteProduct {
+        struct Request {
+            let product: ProductDatabase
+        }
+        struct Response {
+            let success: Bool
+            let error: Error?
+        }
+        struct ViewModel {
+            let message: String
         }
     }
 }

@@ -14,15 +14,10 @@ enum CartBuilder {
         let service = CoreDataService()
         let worker = CartWorker(service: service)
         let presenter = CartPresenter()
-        let router = CartRouter()
         let interactor = CartInteractor(presenter: presenter, worker: worker)
-        let vc = CartViewController(interactor: interactor, router: router)
-        
-        //viewController referansı burada ayarlanıyor
+        let vc = CartViewController(interactor: interactor)
+
         presenter.controller = vc
-        router.controller = vc
-       
-        
         return vc
         
     }

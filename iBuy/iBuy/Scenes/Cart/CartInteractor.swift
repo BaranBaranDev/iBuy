@@ -10,7 +10,8 @@ import Foundation
 
 // MARK: - CartBusinessLogic
 protocol CartBusinessLogic {
-    func fetchProducts(request: CartModels.FetchProducts.Request)
+    func fetchProducts(_ request: CartModels.FetchProducts.Request)
+    func deleteProduct(_ request: CartModels.DeleteProduct.Request)
 }
 
 // MARK: - CartInteractor
@@ -29,15 +30,32 @@ final class CartInteractor {
 
 // MARK: - CartInteractor: CartBusinessLogic
 extension CartInteractor: CartBusinessLogic {
-    func fetchProducts(request: CartModels.FetchProducts.Request) {
+    func fetchProducts(_ request: CartModels.FetchProducts.Request) {
         worker.fetchProducts { [ weak self ] result in
             guard let self = self else { return }
             switch result {
 
             case .success(let products):
-                self.presenter.present(response: CartModels.FetchProducts.Response(products: products, error: nil))
+                let response = CartModels.FetchProducts.Response(products: products, error: nil)
+                self.presenter.presentFetchedProducts(response)
             case .failure(let error):
-                self.presenter.present(response: CartModels.FetchProducts.Response(products: [], error: error))
+                let response = CartModels.FetchProducts.Response(products: [], error: error)
+                self.presenter.presentFetchedProducts(response)
+            }
+        }
+    }
+    
+    func deleteProduct(_ request: CartModels.DeleteProduct.Request) {
+        worker.deleteProduct(request.product) { [weak self] result in
+            guard let self = self else { return }
+
+            switch result {
+            case .success:
+                let response = CartModels.DeleteProduct.Response(success: true, error: nil)
+                self.presenter.presentDeletedProduct(response)
+            case .failure(let error):
+                let response = CartModels.DeleteProduct.Response(success: false, error: error)
+                self.presenter.presentDeletedProduct(response)
             }
         }
     }
