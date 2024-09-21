@@ -2,7 +2,7 @@
 
 iBuy is a modern e-commerce app built with a focus on code quality, performance, and scalable architecture. The app interface is 100% programmatically developed using UIKit, leveraging advanced UICollectionView layouts for a smooth and responsive user experience.
 
-Features
+# Features
 
 Programmatic UIKit: The entire interface is built without Storyboards or XIBs, ensuring full control over the UI and flexibility in layout.
 Compositional Layout: Uses UICollectionView with modern UICollectionViewCompositionalLayout for a flexible and efficient UI, supporting dynamic and complex layouts.
