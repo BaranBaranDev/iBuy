@@ -28,6 +28,7 @@
 		BE15E2762C95C03A0024DF47 /* CartBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE15E26F2C95C03A0024DF47 /* CartBuilder.swift */; };
 		BE15E2772C95C03A0024DF47 /* CartInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE15E2702C95C03A0024DF47 /* CartInteractor.swift */; };
 		BE15E27A2C95C4BB0024DF47 /* CartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE15E2792C95C4BB0024DF47 /* CartCell.swift */; };
+		BE18F7D92C9F616500D599F8 /* UICollection+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE18F7D82C9F616500D599F8 /* UICollection+Ext.swift */; };
 		BE1ED0252C9B5F3E0094D931 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1ED0242C9B5F3E0094D931 /* UIView+Ext.swift */; };
 		BE1ED0272C9B65090094D931 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1ED0262C9B65090094D931 /* UIViewController+Ext.swift */; };
 		BE24F7012C74BAA80049D440 /* ReuseID.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24F7002C74BAA80049D440 /* ReuseID.swift */; };
@@ -88,6 +89,7 @@
 		BE15E26F2C95C03A0024DF47 /* CartBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartBuilder.swift; sourceTree = "<group>"; };
 		BE15E2702C95C03A0024DF47 /* CartInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartInteractor.swift; sourceTree = "<group>"; };
 		BE15E2792C95C4BB0024DF47 /* CartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCell.swift; sourceTree = "<group>"; };
+		BE18F7D82C9F616500D599F8 /* UICollection+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollection+Ext.swift"; sourceTree = "<group>"; };
 		BE1ED0242C9B5F3E0094D931 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		BE1ED0262C9B65090094D931 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		BE24F7002C74BAA80049D440 /* ReuseID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseID.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				BE0B29832C737FEE00A13C83 /* CGFloat+Ext.swift */,
 				BE1ED0242C9B5F3E0094D931 /* UIView+Ext.swift */,
 				BE1ED0262C9B65090094D931 /* UIViewController+Ext.swift */,
+				BE18F7D82C9F616500D599F8 /* UICollection+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -462,6 +465,7 @@
 				BE01DD7E2C970D6A003F2337 /* CartHeaderView.swift in Sources */,
 				BEF63B9A2C837D5E0072E625 /* StackViewFactory.swift in Sources */,
 				BE24F70A2C74CFE70049D440 /* FeatureCell.swift in Sources */,
+				BE18F7D92C9F616500D599F8 /* UICollection+Ext.swift in Sources */,
 				BEDC794C2C80C4DA00AA1F15 /* ImageFactory.swift in Sources */,
 				BE15E2712C95C03A0024DF47 /* CartPresenter.swift in Sources */,
 				BE1ED0272C9B65090094D931 /* UIViewController+Ext.swift in Sources */,
