@@ -30,6 +30,9 @@
 - **Firebase**: Serves as the backend for real-time data management and authentication.
 - **SDWebImage**: Facilitates image loading and caching, enhancing performance and user experience.
 
-## Repository
+## Clone the Repository
 
-[GitHub Repository](https://github.com/BaranBaranDev/iBuy.git)
+To clone this repository, run the following command in your terminal:
+
+```bash
+git clone https://github.com/BaranBaranDev/iBuy.git
