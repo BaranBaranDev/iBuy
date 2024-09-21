@@ -14,7 +14,7 @@
   
 - **Firebase Admin Panel**: Integrates Firebase to handle user data and serve as the backend for real-time database operations.
   
-- **SDWebImage with Caching**: Efficiently loads and caches images using SDWebImage, featuring a custom cache size limit of **50MB** to optimize performance.
+- **SDWebImage with Caching**: Efficiently loads and caches images using SDWebImage, featuring a custom cache size limit to optimize performance.
   
 - **Notification Center & Protocols**: Utilizes `NotificationCenter` and protocols extensively to ensure decoupled communication across app components.
   
