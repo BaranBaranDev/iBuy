@@ -13,15 +13,10 @@ protocol ServiceProtocol {
     func fetchData<T: Decodable>(collectionName: String, completion: @escaping (Result<[T], ServiceError>) -> Void)
 }
 
-
-
-
 // MARK: - FirebaseService Class
 final class FirebaseService {
-    
     //MARK: Private Properties
     private let db = Firestore.firestore()
-
 }
 
 // MARK: - FirebaseService:  ServiceProtocol

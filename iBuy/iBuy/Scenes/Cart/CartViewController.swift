@@ -46,12 +46,18 @@ final class CartViewController: UIViewController {
         fetchProducts()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        products.removeAll()
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         if (self.isViewLoaded) && (self.view.window == nil) {
             self.view = nil
         }
     }
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

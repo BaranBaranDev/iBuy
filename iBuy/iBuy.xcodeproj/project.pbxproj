@@ -49,6 +49,7 @@
 		BE5BE78E2C790E8800025994 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = BE5BE78D2C790E8800025994 /* FirebaseStorageCombine-Community */; };
 		BE5BE7912C79175000025994 /* iBuyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5BE7902C79175000025994 /* iBuyModel.swift */; };
 		BE5BE7942C79241200025994 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5BE7932C79241200025994 /* FirebaseService.swift */; };
+		BE80F95E2CA0B8B70023614B /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE80F95D2CA0B8B70023614B /* CacheManager.swift */; };
 		BE88F18E2C6CC587006AAA84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE88F18D2C6CC587006AAA84 /* AppDelegate.swift */; };
 		BE88F19A2C6CC588006AAA84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE88F1992C6CC588006AAA84 /* Assets.xcassets */; };
 		BE88F19D2C6CC588006AAA84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE88F19B2C6CC588006AAA84 /* LaunchScreen.storyboard */; };
@@ -103,6 +104,7 @@
 		BE5BE77C2C790CA100025994 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BE5BE7902C79175000025994 /* iBuyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iBuyModel.swift; sourceTree = "<group>"; };
 		BE5BE7932C79241200025994 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
+		BE80F95D2CA0B8B70023614B /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		BE88F18A2C6CC587006AAA84 /* iBuy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iBuy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE88F18D2C6CC587006AAA84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE88F1992C6CC588006AAA84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -259,6 +261,14 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		BE80F95C2CA0B8240023614B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BE80F95D2CA0B8B70023614B /* CacheManager.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		BE88F1812C6CC587006AAA84 = {
 			isa = PBXGroup;
 			children = (
@@ -371,6 +381,7 @@
 		BEF63B9D2C8386B70072E625 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				BE80F95C2CA0B8240023614B /* Helpers */,
 				BE24F6FF2C74B9070049D440 /* Constants */,
 				BE0B29822C737FD300A13C83 /* Extensions */,
 				BEF63B9E2C8386C00072E625 /* Enums */,
@@ -503,6 +514,7 @@
 				BE24F70A2C74CFE70049D440 /* FeatureCell.swift in Sources */,
 				BE18F7D92C9F616500D599F8 /* UICollection+Ext.swift in Sources */,
 				BEDC794C2C80C4DA00AA1F15 /* ImageFactory.swift in Sources */,
+				BE80F95E2CA0B8B70023614B /* CacheManager.swift in Sources */,
 				BE15E2712C95C03A0024DF47 /* CartPresenter.swift in Sources */,
 				BE1ED0272C9B65090094D931 /* UIViewController+Ext.swift in Sources */,
 				BE15E2722C95C03A0024DF47 /* CartWorker.swift in Sources */,

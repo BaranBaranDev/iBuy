@@ -57,8 +57,18 @@ final class HomeViewController: UIViewController {
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // Clear memory to free up resources
+        if self.isMovingFromParent || self.isBeingDismissed {
+            products.removeAll()
+            features.removeAll()
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        // Release memory if the view is not visible
         if (self.isViewLoaded) && (self.view.window == nil) {
             self.view = nil
         }
