@@ -1,13 +1,12 @@
 //
 //  FeatureCell.swift
-//  e-commerceApp
+//  iBuy
 //
 //  Created by Baran Baran on 20.08.2024.
 //
 
 import UIKit
 import SnapKit
-import SDWebImage
 
 final class FeatureCell: UICollectionViewCell {
     
@@ -118,21 +117,30 @@ private extension FeatureCell {
 // MARK: - Configure
 extension FeatureCell {
     
-    public func configure(with model: FeatureResponse?) {
-        guard let model = model else { return } // != nil
+    public func configure(with feature: FeatureResponse?) {
+        guard let feature = feature else { return }
+        configureTitleLabel(feature)
+        configureImage(from: feature.url)
+    }
+    
+    @MainActor
+    private func configureTitleLabel(_ feature: FeatureResponse) {
+        titleLabel.text = feature.name
+    }
+    
+    @MainActor
+    private func configureImage(from urlString: String) {
+        guard let url = URL(string: urlString) else { return }
         
-        configureBackgroundImage(model)
-        configureTitleLabel(model)
-        
+        CacheManager.shared.loadImage(from: url) { [weak self] image in
+            guard let self = self else { return }
+            
+            if let image = image {
+                self.backgroundImageView.image = image
+                
+            } else {
+                self.backgroundImageView.image = nil
+            }
+        }
     }
-    
-    private func configureBackgroundImage(_ model: FeatureResponse){
-        guard let url =  URL(string: model.url) else { return }
-        backgroundImageView.sd_setImage(with: url)
-    }
-    
-    private func configureTitleLabel(_ model: FeatureResponse){
-        titleLabel.text = model.name
-    }
-    
 }

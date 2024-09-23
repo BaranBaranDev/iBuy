@@ -46,18 +46,16 @@ final class CartViewController: UIViewController {
         fetchProducts()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        products.removeAll()
-    }
-
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         if (self.isViewLoaded) && (self.view.window == nil) {
             self.view = nil
+            clearMemoryCache()
         }
     }
-
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -66,11 +64,17 @@ final class CartViewController: UIViewController {
             object: nil,
             queue: nil)
         { [weak self] notification in
-                guard let self = self else { return }
-                self.fetchProducts()
-            }
+            guard let self = self else { return }
+            self.fetchProducts()
+        }
     }
-
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name(ReuseID.notificationName), object: nil)
+        clearMemoryCache()
+    }
+    
     
     // MARK: - Setup
     private func setup() {
@@ -93,6 +97,12 @@ final class CartViewController: UIViewController {
     private func fetchProducts() {
         let request = CartModels.FetchProducts.Request()
         interactor.fetchProducts(request)
+    }
+    
+    // MARK: - Cache Clear
+    private func clearMemoryCache() {
+        products.removeAll()
+        CacheManager.shared.clearCache(includeDisk: true)
     }
 }
 
@@ -159,7 +169,7 @@ extension CartViewController: UICollectionViewDelegate {
     }
     
     // MARK:  Swipe To Delete
-    @objc private func handleSwipeToDelete(_ gesture: UISwipeGestureRecognizer) {
+    @objc fileprivate func handleSwipeToDelete(_ gesture: UISwipeGestureRecognizer) {
         guard let cell = gesture.view as? UICollectionViewCell,
               let indexPath = cartCollectionView.indexPath(for: cell) else { return }
         

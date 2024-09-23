@@ -39,7 +39,7 @@ final class CartCell: UICollectionViewCell {
         super.init(frame: frame)
         setup()
         layout()
-      
+        
     }
     
     required init?(coder: NSCoder) {
@@ -61,7 +61,7 @@ private extension CartCell {
         addSubview(labelStackView)
     }
 }
-  // MARK: - Layout
+// MARK: - Layout
 private extension CartCell {
     func layout(){
         productImageView.snp.makeConstraints { make in
@@ -80,18 +80,36 @@ private extension CartCell {
 // MARK: - Configure
 extension CartCell {
     public func configure(with product: ProductDatabase){
-        DispatchQueue.main.async { [weak self] in
+        configureImage(from: product.url ?? "")
+        configureLabel(product)
+        
+    }
+    
+    @MainActor
+    private func configureImage(from urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+        
+        CacheManager.shared.loadImage(from: url) { [weak self] image in
             guard let self = self else { return }
-            productNameLabel.text = product.name
             
-            let priceText = NSMutableAttributedString(
-                string: "$",
-                attributes: [.font: UIFont.boldSystemFont(ofSize: 23)]
-            )
-            priceText.append(NSAttributedString(string: String(product.price)))
-            productPriceLabel.attributedText = priceText
-
-            productImageView.sd_setImage(with: URL(string: product.url ?? ""))
+            if let image = image {
+                self.productImageView.image = image
+                
+            } else {
+                self.productImageView.image = nil
+            }
         }
+    }
+    
+    @MainActor
+    private func configureLabel(_ product: ProductDatabase){
+        productNameLabel.text = product.name
+        
+        let priceText = NSMutableAttributedString(
+            string: "$",
+            attributes: [.font: UIFont.boldSystemFont(ofSize: 23)]
+        )
+        priceText.append(NSAttributedString(string: String(product.price)))
+        productPriceLabel.attributedText = priceText
     }
 }

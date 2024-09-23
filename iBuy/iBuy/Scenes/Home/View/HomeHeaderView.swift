@@ -1,6 +1,6 @@
 //
 //  HeaderView.swift
-//  e-commerceApp
+//  iBuy
 //
 //  Created by Baran Baran on 21.08.2024.
 //
@@ -34,7 +34,8 @@ final class HomeHeaderView: UICollectionReusableView {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        assertionFailure("init(coder:) has not been implemented")
+        return nil
     }
     
     override func prepareForReuse() {

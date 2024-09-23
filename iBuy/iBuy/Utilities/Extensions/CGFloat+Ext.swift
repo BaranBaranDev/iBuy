@@ -1,6 +1,6 @@
 //
 //  CGFloat+Ext.swift
-//  e-commerceApp
+//  iBuy
 //
 //  Created by Baran Baran on 19.08.2024.
 //

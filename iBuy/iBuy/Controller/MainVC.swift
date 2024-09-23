@@ -1,6 +1,6 @@
 //
 //  MainVC.swift
-//  e-commerceApp
+//  iBuy
 //
 //  Created by Baran Baran on 14.08.2024.
 //

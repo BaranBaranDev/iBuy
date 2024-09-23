@@ -61,8 +61,7 @@ final class HomeViewController: UIViewController {
         super.viewWillDisappear(animated)
         // Clear memory to free up resources
         if self.isMovingFromParent || self.isBeingDismissed {
-            products.removeAll()
-            features.removeAll()
+            clearMemoryCache()
         }
     }
     
@@ -71,6 +70,7 @@ final class HomeViewController: UIViewController {
         // Release memory if the view is not visible
         if (self.isViewLoaded) && (self.view.window == nil) {
             self.view = nil
+            clearMemoryCache()
         }
     }
     
@@ -101,6 +101,13 @@ final class HomeViewController: UIViewController {
         let request =  HomeModels.FetchFeatures.Request()
         interactor.fetchFeatures(request)
     }
+    
+    // MARK: - Cache Clear
+     private func clearMemoryCache() {
+         products.removeAll()
+         features.removeAll()
+         CacheManager.shared.clearCache(includeDisk: true)
+     }
 }
 
 // MARK: - HomeViewController: HomeDisplayLogic

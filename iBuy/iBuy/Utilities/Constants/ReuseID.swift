@@ -1,6 +1,6 @@
 //
 //  ReuseID.swift
-//  e-commerceApp
+//  iBuy
 //
 //  Created by Baran Baran on 20.08.2024.
 //

@@ -60,7 +60,7 @@ final class DetailViewController: UIViewController{
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if self.isMovingFromParent || self.isBeingDismissed {
-           product = nil
+            clearMemoryCache()
         }
     }
     
@@ -68,13 +68,19 @@ final class DetailViewController: UIViewController{
         super.didReceiveMemoryWarning()
         if (self.isViewLoaded) && (self.view.window == nil) {
             self.view = nil
+            clearMemoryCache()
         }
     }
-
     
     // MARK: - Setup
     private func setup() {
         view.addSubview(productView)
+    }
+    
+    // MARK: - Cache Clear
+    private func clearMemoryCache() {
+        self.product = nil
+        CacheManager.shared.clearCache(includeDisk: true)
     }
 }
 // MARK: - DetailViewController: ProductViewDelegate

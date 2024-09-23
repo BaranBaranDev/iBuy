@@ -1,20 +1,12 @@
 //
 //  AppDelegate.swift
-//  e-commerceApp
+//  iBuy
 //
 //  Created by Baran Baran on 14.08.2024.
-//
-//
-//  AppDelegate.swift
-//  e-commerceApp
-//
-//  Created by Baran Baran on 14.08.2024.
-//
 
 import UIKit
 import CoreData
 import FirebaseCore
-import SDWebImage
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -47,14 +39,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = MainVC()
     }
     
-    // MARK: - SDWebImage Cache Configuration
+    // MARK: - Cache Configuration
     fileprivate func configureSDWebImageCache() {
-        let cache = SDImageCache.shared
-        cache.config.maxMemoryCost = 50 * 1024 * 1024    // Max 50 MB memory
-        cache.config.maxDiskSize = 50 * 1024 * 1024      // Max 50 MB disk space
-        cache.config.shouldCacheImagesInMemory = true    // Cache images in memory
-        cache.config.diskCacheExpireType = .accessDate   // Expire cache based on last access date
-        cache.config.maxDiskAge = 60 * 60 * 24 * 7       // 1 week disk cache expiration
+        CacheManager.shared.configureCache(countLimit: 20, totalCostLimit: 50 * 1024 * 1024)
+
     }
 
 }

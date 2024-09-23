@@ -1,6 +1,6 @@
 //
 //  HomeSectionFactory.swift
-//  e-commerceApp
+//  iBuy
 //
 //  Created by Baran Baran on 21.08.2024.
 //

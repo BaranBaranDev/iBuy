@@ -1,6 +1,6 @@
 //
 //  ProductCell.swift
-//  e-commerceApp
+//  iBuy
 //
 //  Created by Baran Baran on 20.08.2024.
 //
@@ -10,7 +10,6 @@ import UIKit
 final class ProductCell: UICollectionViewCell {
     
     // MARK: - UI Elements
-    
     private lazy var productImageView: UIImageView = {
         return ImageFactory.build()
     }()
@@ -40,7 +39,8 @@ final class ProductCell: UICollectionViewCell {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        assertionFailure("init(coder:) has not been implemented")
+        return nil
     }
     
     override func prepareForReuse() {
@@ -71,15 +71,27 @@ private extension ProductCell {
 extension ProductCell {
     public func configure(with product: ProductResponse?) {
         guard let product = product else { return }
-        configureProductImage(product)
+        configureProductImage(from: product.url)
         configureProductLabel(product)
     }
     
-    private func configureProductImage(_ product: ProductResponse){
-        guard let url =  URL(string: product.url) else { return }
-        productImageView.sd_setImage(with: url)
+    @MainActor
+    private func configureProductImage(from urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+        
+        CacheManager.shared.loadImage(from: url) { [weak self] image in
+            guard let self = self else { return }
+            
+            if let image = image {
+                let compressedImage = CacheManager.shared.compressImage(image, toSize: CGSize(width: 100, height: 100))
+                self.productImageView.image = compressedImage
+            } else {
+                self.productImageView.image = nil
+            }
+        }
     }
-    
+
+    @MainActor
     private func configureProductLabel(_ product: ProductResponse) {
         productName.text = product.name
         

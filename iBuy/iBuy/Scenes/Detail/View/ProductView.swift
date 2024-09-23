@@ -112,21 +112,32 @@ private extension ProductView {
 extension ProductView {
     public func configure(with product: ProductResponse?) {
         guard let product = product else { return }
-
-        DispatchQueue.main.async { [weak self] in
+        configureLabel(for: product)
+        configureProductImage(from: product.url)
+    }
+    
+    @MainActor
+    private func configureProductImage(from urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+        
+        CacheManager.shared.loadImage(from: url) { [weak self] image in
             guard let self = self else { return }
-            self.configureLabel(for: product)
-            if let url = URL(string: product.url) {
-                self.productImageView.sd_setImage(with: url)
+            
+            if let image = image {
+                let compressedImage = CacheManager.shared.compressImage(image, toSize: CGSize(width: 100, height: 100))
+                self.productImageView.image = compressedImage
+            } else {
+                self.productImageView.image = nil
             }
         }
     }
     
+    @MainActor
     private func configureLabel(for product: ProductResponse) {
         productNameLabel.text = product.name
         productPriceLabel.attributedText = formatPriceText(for: Double(product.price))
     }
-
+    
     private func formatPriceText(for price: Double) -> NSAttributedString {
         let priceText = "$\(price)"
         let attributedText = NSMutableAttributedString(
