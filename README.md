@@ -1,6 +1,6 @@
 # iBuy - E-Commerce App
 
-**iBuy** is a modern e-commerce application designed with a strong emphasis on code quality, performance, and scalable architecture. The app's interface is developed entirely programmatically using UIKit, utilizing advanced UICollectionView layouts to provide a smooth and responsive user experience.
+**iBuy** is a modern e-commerce application designed with a strong emphasis on code quality, performance, and scalable architecture. The app's interface is developed entirely programmatically using UIKit and SnapKit, utilizing advanced UICollectionView layouts to provide a smooth and responsive user experience.
 
 ## Features
 
@@ -14,7 +14,7 @@
   
 - **Firebase Admin Panel**: Integrates Firebase to handle user data and serve as the backend for real-time database operations.
   
-- **SDWebImage with Caching**: Efficiently loads and caches images using SDWebImage, featuring a custom cache size limit to optimize performance.
+- **Custom Image Caching**: Efficiently loads and caches images using a custom NSCache manager, promoting performance and optimization.
   
 - **Notification Center & Protocols**: Utilizes `NotificationCenter` and protocols extensively to ensure decoupled communication across app components.
   
@@ -25,14 +25,14 @@
 ## Core Technologies
 
 - **UIKit**: For custom, programmatic UI development.
+- **SnapKit**: For creating layouts programmatically with a simple syntax.
 - **Clean Swift Architecture (VIP)**: Ensures separation of concerns and promotes scalable code.
 - **Core Data**: For persistent data storage solutions.
 - **Firebase**: Serves as the backend for real-time data management and authentication.
-- **SDWebImage**: Facilitates image loading and caching, enhancing performance and user experience.
 
 ## Clone the Repository
 
 To clone this repository, run the following command in your terminal:
 
 ```bash
-https://github.com/BaranBaranDev/iBuy.git
+git clone https://github.com/BaranBaranDev/iBuy.git
