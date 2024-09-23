@@ -1,5 +1,9 @@
 # iBuy - E-Commerce App
 
+https://github.com/user-attachments/assets/73b69007-e979-46d6-8b31-5bce1412654d
+
+
+
 **iBuy** is a modern e-commerce application designed with a strong emphasis on code quality, performance, and scalable architecture. The app's interface is developed entirely programmatically using UIKit and SnapKit, utilizing advanced UICollectionView layouts to provide a smooth and responsive user experience.
 
 ## Features
