@@ -34,6 +34,13 @@ https://github.com/user-attachments/assets/73b69007-e979-46d6-8b31-5bce1412654d
 - **Core Data**: For persistent data storage solutions.
 - **Firebase**: Serves as the backend for real-time data management and authentication.
 
+## Sources
+- **Clean Swift VIP**: https://lnkd.in/dNfgHR8V
+- **Clean Swift VIP Template**: https://lnkd.in/dz5Xe-Qn
+- **Modern Layout**: https://lnkd.in/dMqYGBEx
+- **NSCache**: https://lnkd.in/dw3GYMU6
+
+
 ## Clone the Repository
 
 To clone this repository, run the following command in your terminal:
